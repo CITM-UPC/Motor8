@@ -1,18 +1,28 @@
-#pragma once
+#ifndef __ModuleUI_H__
+#define __ModuleUI_H__
+
 #include "Module.h"
-#include "Globals.h"
-#include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_glut.h"
-#include "ImGui/imgui_impl_opengl2.h"
+#include "SDL/include/SDL.h"
+
+class Application;
 
 class ModuleUI : public Module
 {
 public:
 	ModuleUI(bool start_enabled = true);
-	~ModuleUI();
 
-	bool Start();
-	update_status Update(float dt) override;
-	update_status PostUpdate(float dt)override;
+	// Destructor
+	virtual ~ModuleUI();
+
+	bool Init();
+	update_status PreUpdate(float dt);
+	update_status Update(float dt);
+	update_status PostUpdate(float dt);
 	bool CleanUp();
+
+public:
+
+
 };
+
+#endif // __ModuleWindow_H__

@@ -13,7 +13,8 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
-    <ProjectName>Motor8</ProjectName>
+    <ProjectName>Bugame</ProjectName>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -40,12 +41,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(IncludePath);$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)SDL\include;$(SolutionDir)ImGui;$(SolutionDir)Debug;$(SolutionDir)SDL_mixer\include</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\lib;$(SolutionDir)Debug;$(SolutionDir)SDL_mixer\libx86;$(SolutionDir)SDL\libx86</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL\libx86;$(SolutionDir)SDL_mixer\libx86;$(SolutionDir)Debug;$(SolutionDir)glew\glew-2.2.0\lib;$(SolutionDir)ImGui;$(SolutionDir)Bugame\MathGeo\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>Bugame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\mllur\OneDrive\Documentos\GitHub\Bugame\SDL\include;C:\Users\mllur\OneDrive\Documentos\GitHub\Bugame\SDL_mixer\include;C:\Users\mllur\OneDrive\Documentos\GitHub\Bugame\Game;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\mllur\OneDrive\Documentos\GitHub\Bugame\SDL\libx86;C:\Users\mllur\OneDrive\Documentos\GitHub\Bugame\SDL_mixer\libx86;C:\Users\mllur\OneDrive\Documentos\GitHub\Bugame\Game;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL\libx86;$(SolutionDir)SDL_mixer\libx86;$(SolutionDir)Debug;$(SolutionDir)glew\glew-2.2.0\lib;$(SolutionDir)ImGui;$(SolutionDir)Bugame\MathGeo\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>Bugame</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -54,12 +57,13 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions); WINDOWS_IGNORE_PACKING_MISMATCH</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,6 +75,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions); WINDOWS_IGNORE_PACKING_MISMATCH</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -78,7 +83,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -88,6 +93,8 @@
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_impl_opengl2.h" />
+    <ClInclude Include="ImGui\imgui_impl_sdl.h" />
     <ClInclude Include="ImGui\imgui_internal.h" />
     <ClInclude Include="ImGui\imstb_rectpack.h" />
     <ClInclude Include="ImGui\imstb_textedit.h" />
@@ -114,6 +121,8 @@
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_sdl.cpp" />
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Light.cpp" />

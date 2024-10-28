@@ -2,9 +2,9 @@
 #include "Application.h"
 #include "ModuleAudio.h"
 
-#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
+//#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
-ModuleAudio::ModuleAudio(bool start_enabled) : Module(start_enabled), music(NULL)
+ModuleAudio::ModuleAudio(bool start_enabled) : Module(start_enabled)
 {}
 
 // Destructor
@@ -16,6 +16,7 @@ bool ModuleAudio::Init()
 {
 	LOG("Loading Audio Mixer");
 	bool ret = true;
+	/*
 	SDL_Init(0);
 
 	if(SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
@@ -39,7 +40,7 @@ bool ModuleAudio::Init()
 	{
 		LOG("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
 		ret = false;
-	}
+	}*/
 
 	return ret;
 }
@@ -49,7 +50,7 @@ bool ModuleAudio::CleanUp()
 {
 	LOG("Freeing sound FX, closing Mixer and Audio subsystem");
 
-	if(music != NULL)
+	/*if (music != NULL)
 	{
 		Mix_FreeMusic(music);
 	}
@@ -63,7 +64,7 @@ bool ModuleAudio::CleanUp()
 
 	fx.clear();
 	Mix_CloseAudio();
-	Mix_Quit();
+	Mix_Quit();*/
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 	return true;
 }
@@ -73,7 +74,7 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 {
 	bool ret = true;
 	
-	if(music != NULL)
+	/*if (music != NULL)
 	{
 		if(fade_time > 0.0f)
 		{
@@ -113,7 +114,7 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 				ret = false;
 			}
 		}
-	}
+	}*/
 
 	LOG("Successfully playing %s", path);
 	return ret;
@@ -124,7 +125,7 @@ unsigned int ModuleAudio::LoadFx(const char* path)
 {
 	unsigned int ret = 0;
 
-	Mix_Chunk* chunk = Mix_LoadWAV(path);
+	/*Mix_Chunk* chunk = Mix_LoadWAV(path);
 
 	if(chunk == NULL)
 	{
@@ -135,7 +136,7 @@ unsigned int ModuleAudio::LoadFx(const char* path)
 		fx.add(chunk);
 		ret = fx.count();
 	}
-
+	*/
 	return ret;
 }
 
@@ -144,13 +145,13 @@ bool ModuleAudio::PlayFx(unsigned int id, int repeat)
 {
 	bool ret = false;
 
-	Mix_Chunk* chunk = NULL;
+	/*Mix_Chunk* chunk = NULL;
 	
 	if(fx.at(id-1, chunk) == true)
 	{
 		Mix_PlayChannel(-1, chunk, repeat);
 		ret = true;
-	}
+	}*/
 
 	return ret;
 }

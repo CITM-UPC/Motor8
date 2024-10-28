@@ -1,5 +1,9 @@
 #include "Application.h"
 
+//#include "MathGeo/src/MathGeoLib.lib"
+
+//#pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
+
 Application::Application() : debug(false)
 {
 	window = new ModuleWindow();
@@ -46,6 +50,8 @@ bool Application::Init()
 
 	App = this;
 
+	//Clock::Day();
+
 	// Call Init() in all modules
 	p2List_item<Module*>* item = list_modules.getFirst();
 
@@ -56,7 +62,7 @@ bool Application::Init()
 	}
 
 	// After all Init calls we call Start() in all modules
-	LOG("Application Start --------------");
+	//LOG("Application Start --------------");
 	item = list_modules.getFirst();
 
 	while(item != NULL && ret == true)
@@ -65,6 +71,7 @@ bool Application::Init()
 		item = item->next;
 	}
 
+	ms_timer.Start();
 	return ret;
 }
 

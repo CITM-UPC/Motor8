@@ -1,6 +1,6 @@
 #pragma once
 
-class  Application;
+class  PhysBody3D;
 
 class Module
 {
