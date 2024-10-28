@@ -7,11 +7,15 @@
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl2.h"
 #include "ModuleInput.h"
+#include "ModuleWindow.h"
+#include "UI.h"
+#include "AboutMenu.h"
 
 #pragma comment (lib, "glew/glew-2.2.0/lib/glew32.lib")
 
 ModuleUI::ModuleUI(bool start_enabled) : Module(start_enabled)
 {
+
 }
 
 // Destructor
@@ -26,6 +30,7 @@ bool ModuleUI::Init()
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	//io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+	//io.ConfigFlags |= ImGuiConfigFlags_
 	//io.BackendFlags 
 	ImGui::StyleColorsDark();
 
@@ -38,43 +43,117 @@ bool ModuleUI::Init()
 	return true;
 }
 
-update_status ModuleUI::PreUpdate(float dt)
+bool ModuleUI::PreUpdate(float dt)
+{
+	
+	return true;
+}
+
+bool ModuleUI::Update(float dt)
 {
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
+	
+	MainMenu();
 
-	return UPDATE_CONTINUE;
-}
-
-update_status ModuleUI::Update(float dt)
-{
- 
-	return UPDATE_CONTINUE;
-}
-update_status ModuleUI::PostUpdate(float dt)
-{
-	ImGui::ShowDemoWindow();
-	ImGui::Begin("Edge Engine");
-	ImGui::SetWindowSize({ 250,250 }, 0);
-	ImGui::Text("First Window");
-	if (ImGui::Button("TEST", { 100,50 }))
+	for (std::vector<UI*>::iterator it = menus.begin(); it != menus.end(); ++it)
 	{
-		exit(0);
+		if ((*it)->IsActive())
+		{
+			(*it)->Draw();
+		}
 	}
-	ImGui::End();
+
+
 	ImGui::Render();
+	//ImGui::EndFrame();
+	//ImGui::UpdatePlatformWindows();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 
-	return UPDATE_CONTINUE;
+	return true;
+}
+
+bool ModuleUI::PostUpdate(float dt)
+{
+	
+	return true;
 }
 
 // Called before quitting
 bool ModuleUI::CleanUp()
 {
+	for (int i = 0; i < menus.size(); i++)
+	{
+		menus[i]->CleanUp();
+		delete menus[i];
+	}
+	menus.clear();
+
 	ImGui_ImplOpenGL2_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
 
 	return true;
+}
+
+void ModuleUI::MainMenu()
+{
+	//MENUS 
+	ImGui::BeginMainMenuBar();
+	{
+		if (ImGui::BeginMenu("GeneralStuff"))
+		{
+			if (ImGui::Checkbox("AboutMenu", &enableAboutMenu))
+			{
+				aboutMenu->active = enableAboutMenu;
+			}
+			ImGui::EndMenu();
+
+		}
+		if (ImGui::BeginMenu("Configuration"))
+		{
+			ImGui::EndMenu();
+
+		}
+		if (ImGui::BeginMenu("Application"))
+		{
+			ImGui::EndMenu();
+
+		}
+		if (ImGui::BeginMenu("Window"))
+		{
+
+			if (ImGui::Checkbox("Fullscreen", &fullscreen))
+			{
+				App->window->SetFullscreen(fullscreen);
+			}
+			if (ImGui::SliderInt("Width", &screenWidth, 0, 1920))
+			{
+				App->window->ModifyWidth(screenWidth);
+			}
+			if (ImGui::SliderInt("Height", &screenHeight, 0, 1920))
+			{
+				App->window->ModifyHeight(screenHeight);
+			}
+
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("File System"))
+		{
+			ImGui::EndMenu();
+
+		}
+		if (ImGui::BeginMenu("Input"))
+		{
+			ImGui::EndMenu();
+
+		}
+		if (ImGui::BeginMenu("Hardware"))
+		{
+			ImGui::EndMenu();
+
+		}
+	}
+	ImGui::EndMainMenuBar();
 }
