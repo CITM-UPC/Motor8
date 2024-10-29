@@ -6,6 +6,10 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 
+//#include "MathGeo/src/MathGeoLib.lib"
+
+//#pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
+
 Application::Application() : debug(false)
 {
 	window = new ModuleWindow();
@@ -15,6 +19,7 @@ Application::Application() : debug(false)
 	camera = new ModuleCamera3D();
 	ui = new ModuleUI();
 	audio = new ModuleAudio();
+
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -39,7 +44,7 @@ Application::~Application()
 {
 	std::list<Module*>::reverse_iterator item;
 
-	for (item = list_modules.rbegin(); item != list_modules.rend(); ++item)
+	for(item = list_modules.rbegin(); item != list_modules.rend();++item)
 	{
 		RELEASE(*item);
 	}
@@ -52,24 +57,22 @@ bool Application::Init()
 
 	/*char* buffer = nullptr;
 
-	if (buffer != nullptr)
-	{
-		std::list<Module*>::iterator item;
+	if(buffer != nullptr) {
+		std::list < Module*>::iterator item;
 
 		RELEASE_ARRAY(buffer);
 
 	}*/
 
 	//Call Init() in all modules
-	std::list<Module*>::iterator item;
-
 	LOG("Application Init");
+
+	std::list<Module*>::iterator item;
 
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
 		ret = (*item)->Init();
 		ret = (*item)->Start();
-
 	}
 
 	return ret;
@@ -95,21 +98,14 @@ bool Application::Update()
 
 	std::list<Module*>::iterator item = list_modules.begin();
 
-	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
+	for(item = list_modules.begin(); item != list_modules.end() && ret; item)
 	{
 		ret = (*item)->PreUpdate(dt);
-
 	}
 
-	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
-	{
-		ret = (*item)->Update(dt);
-	}
-
-	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
+	for(item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
 		ret = (*item)->PostUpdate();
-
 	}
 
 	FinishUpdate();
@@ -121,8 +117,7 @@ bool Application::CleanUp()
 	bool ret = true;
 	std::list<Module*>::reverse_iterator item;
 
-	for (item = list_modules.rbegin(); item != list_modules.rend(); ++item)
-	{
+	for (item = list_modules.rbegin(); item != list_modules.rend(); ++item) {
 		ret = (*item)->CleanUp();
 	}
 	return ret;

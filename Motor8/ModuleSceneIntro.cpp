@@ -46,11 +46,14 @@ bool ModuleSceneIntro::Update(float dt)
 	{
 		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
+			//TODO 3: Create a "new" sphere, and add it to the "primitives" DynArray
 
+			//TODO 9: Push ModuleSceneIntro to the sphere collision listeners
 		}
 	}
 
 
+	//TODO 3: Nothing to do here. But it's good to know where all primitives are being updated
 	for (uint n = 0; n < primitives.size(); n++)
 	{
 		primitives[n]->Update();
@@ -61,6 +64,7 @@ bool ModuleSceneIntro::Update(float dt)
 
 bool ModuleSceneIntro::PostUpdate()
 {
+	//TODO 3: Nothing to do here. But it's good to know where all primitives are being rendered
 	for (uint n = 0; n < primitives.size(); n++)
 	{
 		primitives[n]->Render();
@@ -68,3 +72,5 @@ bool ModuleSceneIntro::PostUpdate()
 
 	return true;
 }
+
+//TODO 9: And change the color of the colliding bodies, so we can visualize it working!
