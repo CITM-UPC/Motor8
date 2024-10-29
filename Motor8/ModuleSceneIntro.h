@@ -1,7 +1,7 @@
 #pragma once
 #include "Module.h"
+#include "p2DynArray.h"
 #include "Globals.h"
-#include <vector>
 
 
 class Primitive;
@@ -14,12 +14,12 @@ public:
 	~ModuleSceneIntro();
 
 	bool Start();
-	bool Update(float dt) override;
-	bool PostUpdate();
+	update_status Update(float dt) override;
+	update_status PostUpdate(float dt) override;
 	bool CleanUp();
 
 	//TODO 9: Create an "OnCollision" method specific for this module
 
 private:
-	std::vector<Primitive*> primitives;
+	p2DynArray<Primitive*> primitives;
 };

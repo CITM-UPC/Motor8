@@ -13,8 +13,8 @@ public:
 	~ModuleRenderer3D();
 
 	bool Init();
-	bool PreUpdate(float dt) override;
-	bool PostUpdate();
+	update_status PreUpdate(float dt) override;
+	update_status PostUpdate(float dt) override;
 	bool CleanUp();
 
 	void OnResize(int width, int height);

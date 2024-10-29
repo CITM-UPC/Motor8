@@ -1,10 +1,4 @@
 #include "Application.h"
-#include "Globals.h"
-#include "ModuleWindow.h"
-#include "ModuleInput.h"
-#include "ModuleSceneIntro.h"
-#include "ModuleRenderer3D.h"
-#include "ModuleCamera3D.h"
 
 //#include "MathGeo/src/MathGeoLib.lib"
 
@@ -14,11 +8,11 @@ Application::Application() : debug(false)
 {
 	window = new ModuleWindow();
 	input = new ModuleInput();
+	audio = new ModuleAudio();
 	scene_intro = new ModuleSceneIntro();
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	ui = new ModuleUI();
-	audio = new ModuleAudio();
 
 
 	// The order of calls is very important!
@@ -42,11 +36,12 @@ Application::Application() : debug(false)
 
 Application::~Application()
 {
-	std::list<Module*>::reverse_iterator item;
+	p2List_item<Module*>* item = list_modules.getLast();
 
-	for(item = list_modules.rbegin(); item != list_modules.rend();++item)
+	while (item != NULL)
 	{
-		RELEASE(*item);
+		delete item->data;
+		item = item->prev;
 	}
 }
 
@@ -55,25 +50,25 @@ bool Application::Init()
 	bool ret = true;
 	App = this;
 
-	/*char* buffer = nullptr;
+	p2List_item<Module*>* item = list_modules.getFirst();
 
-	if(buffer != nullptr) {
-		std::list < Module*>::iterator item;
+	while (item != NULL && ret == true)
+	{
+		ret = item->data->Init();
+		item = item->next;
 
-		RELEASE_ARRAY(buffer);
-
-	}*/
+	}
 
 	//Call Init() in all modules
-	LOG("Application Init");
-
-	std::list<Module*>::iterator item;
-
-	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
+	//LOG("Application Start --------------");
+	item = list_modules.getFirst();
+	while (item != NULL && ret == true)
 	{
-		ret = (*item)->Init();
-		ret = (*item)->Start();
+		ret = item->data->Start();
+		item = item->next;
 	}
+
+	ms_timer.Start();
 
 	return ret;
 }
@@ -91,21 +86,34 @@ void Application::FinishUpdate()
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
-bool Application::Update()
+update_status Application::Update()
 {
-	bool ret = true;
+	update_status ret = UPDATE_CONTINUE;
 	PrepareUpdate();
 
-	std::list<Module*>::iterator item = list_modules.begin();
+	p2List_item<Module*>* item = list_modules.getFirst();
 
-	for(item = list_modules.begin(); item != list_modules.end() && ret; item)
+	while (item != NULL && ret == UPDATE_CONTINUE)
 	{
-		ret = (*item)->PreUpdate(dt);
+		ret = item->data->PreUpdate(dt);
+		item = item->next;
 	}
 
-	for(item = list_modules.begin(); item != list_modules.end() && ret; ++item)
+	item = list_modules.getFirst();
+
+	while (item != NULL && ret == UPDATE_CONTINUE)
 	{
-		ret = (*item)->PostUpdate();
+		ret = item->data->Update(dt);
+		item = item->next;
+	}
+
+	item = list_modules.getFirst();
+
+
+	while (item != NULL && ret == UPDATE_CONTINUE)
+	{
+		ret = item->data->PostUpdate(dt);
+		item = item->next;
 	}
 
 	FinishUpdate();
@@ -115,17 +123,19 @@ bool Application::Update()
 bool Application::CleanUp()
 {
 	bool ret = true;
-	std::list<Module*>::reverse_iterator item;
+	p2List_item<Module*>* item = list_modules.getLast();
 
-	for (item = list_modules.rbegin(); item != list_modules.rend(); ++item) {
-		ret = (*item)->CleanUp();
+	while (item != NULL && ret == true)
+	{
+		ret = item->data->CleanUp();
+		item = item->prev;
 	}
 	return ret;
 }
 
 void Application::AddModule(Module* mod)
 {
-	list_modules.push_back(mod);
+	list_modules.add(mod);
 }
 
 Application* App = nullptr;

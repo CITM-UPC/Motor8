@@ -25,6 +25,9 @@
     <Filter Include="Sources\Menus">
       <UniqueIdentifier>{384c39b0-daef-4f00-8a98-2854a3f844c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Menus\UI">
+      <UniqueIdentifier>{911eae66-75de-48c6-a2f8-32d701725584}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -105,6 +108,12 @@
     <ClInclude Include="ImGui\imgui_impl_opengl2.h">
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Sources\Menus\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="AboutMenu.h">
+      <Filter>Sources\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -172,6 +181,12 @@
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_opengl2.cpp">
       <Filter>Sources\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Sources\Menus\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="AboutMenu.cpp">
+      <Filter>Sources\Menus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

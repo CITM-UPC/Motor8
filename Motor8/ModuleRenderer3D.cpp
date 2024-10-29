@@ -104,7 +104,7 @@ bool ModuleRenderer3D::Init()
 }
 
 // PreUpdate: clear buffer
-bool ModuleRenderer3D::PreUpdate(float dt)
+update_status ModuleRenderer3D::PreUpdate(float dt)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -118,14 +118,14 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
-	return true;
+	return UPDATE_CONTINUE;
 }
 
 // PostUpdate present buffer to screen
-bool ModuleRenderer3D::PostUpdate()
+update_status ModuleRenderer3D::PostUpdate(float dt)
 {
 	SDL_GL_SwapWindow(App->window->window);
-	return true;
+	return UPDATE_CONTINUE;
 }
 
 // Called before quitting

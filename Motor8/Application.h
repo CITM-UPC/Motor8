@@ -1,7 +1,6 @@
 #pragma once
 
-#include <list>
-#include <string>
+#include "p2List.h"
 #include "Globals.h"
 #include "Timer.h"
 #include "Module.h"
@@ -27,7 +26,7 @@ public:
 	bool debug;
 private:
 
-	std::list<Module*> list_modules;
+	p2List<Module*> list_modules;
 	Timer	ms_timer;
 	float	dt;
 
@@ -37,7 +36,7 @@ public:
 	~Application();
 
 	bool Init();
-	bool Update();
+	update_status Update();
 	bool CleanUp();
 
 private:
