@@ -24,9 +24,11 @@ public:
 	bool CleanUp();
 
 public:
+	// MENUS
 	void MainMenu();
 
 	bool fullscreen;
+	bool Vsync;
 	int screenWidth;
 	int screenHeight;
 

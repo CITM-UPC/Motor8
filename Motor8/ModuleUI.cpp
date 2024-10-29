@@ -128,11 +128,15 @@ void ModuleUI::MainMenu()
 			{
 				App->window->SetFullscreen(fullscreen);
 			}
-			if (ImGui::SliderInt("Width", &screenWidth, 0, 1920))
+			if (ImGui::Checkbox("Vsync", &Vsync))
+			{ 
+				App->window->Vsync(Vsync);
+			}
+			if (ImGui::SliderInt("Width", &screenWidth, 640, 1920))
 			{
 				App->window->ModifyWidth(screenWidth);
 			}
-			if (ImGui::SliderInt("Height", &screenHeight, 0, 1920))
+			if (ImGui::SliderInt("Height", &screenHeight, 480, 1080))
 			{
 				App->window->ModifyHeight(screenHeight);
 			}

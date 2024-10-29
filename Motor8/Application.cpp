@@ -63,7 +63,7 @@ bool Application::Init()
 	//Call Init() in all modules
 	std::list<Module*>::iterator item;
 
-	LOG("Application Init");
+	//LOG("Application Init");
 
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
@@ -132,5 +132,45 @@ void Application::AddModule(Module* mod)
 {
 	list_modules.push_back(mod);
 }
+
+void Application::SaveConfig()
+{
+	LOG_COMMENT("Saving configuration");
+
+	JsonParsing jsonFile;
+
+	// Call Init() in all modules
+	std::list<Module*>::iterator item;
+	for (item = list_modules.begin(); item != list_modules.end(); ++item)
+	{
+		(*item)->SaveConfig(jsonFile.SetChild(jsonFile.GetRootValue(), (*item)->name));
+	}
+	char* buf;
+	uint size = jsonFile.Save(&buf);
+	RELEASE_ARRAY(buf);
+	//jsonFile.SerializeFile(root, CONFIG_FILENAME);
+	saveRequest = false;
+}
+
+void Application::LoadConfig()
+{
+	LOG_COMMENT("Loading configuration");
+
+	char* buffer = nullptr;
+
+	if (buffer != nullptr)
+	{
+		JsonParsing jsonFile((const char*)buffer);
+		jsonFile.ValueToObject(jsonFile.GetRootValue());
+		std::list<Module*>::iterator item;
+		for (item = list_modules.begin(); item != list_modules.end(); ++item)
+		{
+			(*item)->LoadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), (*item)->name));
+		}
+		RELEASE_ARRAY(buffer);
+	}
+	loadRequest = false;
+}
+
 
 Application* App = nullptr;

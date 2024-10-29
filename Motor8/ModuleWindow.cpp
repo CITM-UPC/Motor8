@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleWindow.h"
+#include "ModuleRenderer3D.h"
 
 ModuleWindow::ModuleWindow(bool start_enabled) : Module(start_enabled)
 {
@@ -16,12 +17,12 @@ ModuleWindow::~ModuleWindow()
 // Called before render is available
 bool ModuleWindow::Init()
 {
-	LOG("Init SDL window & surface");
+	LOG_COMMENT("Init SDL window & surface");
 	bool ret = true;
 
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
+		LOG_COMMENT("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
 	else
@@ -59,7 +60,7 @@ bool ModuleWindow::Init()
 
 		if(window == NULL)
 		{
-			LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+			LOG_COMMENT("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 			ret = false;
 		}
 		else
@@ -75,7 +76,7 @@ bool ModuleWindow::Init()
 // Called before quitting
 bool ModuleWindow::CleanUp()
 {
-	LOG("Destroying SDL window and quitting all SDL systems");
+	LOG_COMMENT("Destroying SDL window and quitting all SDL systems");
 
 	//Destroy window
 	if(window != NULL)
@@ -99,8 +100,17 @@ void ModuleWindow::SetFullscreen(bool fullscreen)
 void ModuleWindow::ModifyWidth(int x)
 {
 	SDL_SetWindowSize(window, x, screen_surface->h);
+	App->renderer3D->OnResize(x, screen_surface->h);
+	screen_surface->w = x;
 }
 void ModuleWindow::ModifyHeight(int y)
 {
 	SDL_SetWindowSize(window, screen_surface->w, y);
+	App->renderer3D->OnResize(screen_surface->w, y);
+	screen_surface->h = y;
+}
+
+void ModuleWindow::Vsync(bool vsync)
+{
+	vsync = SDL_HINT_RENDER_VSYNC;
 }
