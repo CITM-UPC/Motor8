@@ -7,6 +7,7 @@
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl2.h"
 #include "ModuleInput.h"
+#include "ModuleWindow.h"
 #include "UI.h"
 #include "AboutMenu.h"
 
@@ -28,8 +29,8 @@ bool ModuleUI::Init()
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	//io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
-	//io.ConfigFlags |= ImGuiConfigFlags_
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+	//io.ConfigFlags |= ImGuiConfigFlags_
 	//io.BackendFlags 
 	ImGui::StyleColorsDark();
 
@@ -42,14 +43,13 @@ bool ModuleUI::Init()
 	return true;
 }
 
-update_status ModuleUI::PreUpdate(float dt)
+bool ModuleUI::PreUpdate(float dt)
 {
-	//Way to add menus to the menu list
-	menus.push_back(aboutMenu = new AboutMenu());
-	return UPDATE_CONTINUE;
+	
+	return true;
 }
 
-update_status ModuleUI::Update(float dt)
+bool ModuleUI::Update(float dt)
 {
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
@@ -71,12 +71,13 @@ update_status ModuleUI::Update(float dt)
 	//ImGui::UpdatePlatformWindows();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 
-	return UPDATE_CONTINUE;
+	return true;
 }
 
-update_status ModuleUI::PostUpdate(float dt)
+bool ModuleUI::PostUpdate(float dt)
 {
-	return UPDATE_CONTINUE;
+	
+	return true;
 }
 
 // Called before quitting
