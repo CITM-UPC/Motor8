@@ -26,6 +26,8 @@ public:
 	void ModifyBrightness(float brightness);
 	void SetResizable(bool resizable);
 	void SetFullDesktop(bool fullDesktop);
+	bool LoadConfig(JsonParsing& node) override;
+	bool SaveConfig(JsonParsing& node) const override;
 
 public:
 	//The window we'll be rendering to
