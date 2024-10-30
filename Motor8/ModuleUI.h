@@ -42,8 +42,6 @@ public:
 	AboutMenu* aboutMenu;
 private:
 	std::vector<UI*> menus;
-	std::vector<float> frames;
-	std::vector<float> miliseconds;
 
 };
 

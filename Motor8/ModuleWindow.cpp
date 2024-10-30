@@ -5,8 +5,6 @@
 
 ModuleWindow::ModuleWindow(bool start_enabled) : Module(start_enabled)
 {
-	name = "Window";
-
 	window = NULL;
 	screen_surface = NULL;
 }
@@ -125,32 +123,6 @@ void ModuleWindow::ModifyBrightness(float brightness)
 	{
 		LOG_COMMENT("Setting Brightness Value");
 	}
-}
-bool ModuleWindow::LoadConfig(JsonParsing& node)
-{
-	App->ui->fullscreen = node.GetJsonBool("fullscreen");
-	/*App->ui->screenWidth = node.GetJsonBool("screen width");
-	App->ui->screenHeight = node.GetJsonBool("screen height");*/
-	App->ui->Vsync = node.GetJsonBool("vsync");
-	App->ui->screenBrightness = node.GetJsonNumber("brightness");
-	App->window->SetFullscreen(App->ui->fullscreen);
-	/*App->window->ModifyWidth(App->ui->screenWidth);
-	App->window->ModifyHeight(App->ui->screenHeight);*/
-	App->window->Vsync(App->ui->Vsync);
-	App->window->ModifyBrightness(App->ui->screenBrightness);
-
-	return true;
-}
-
-bool ModuleWindow::SaveConfig(JsonParsing& node) const
-{
-	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "fullscreen", App->ui->fullscreen);
-	/*node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "screen width", App->ui->screenWidth);
-	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "screen height", App->ui->screenHeight);*/
-	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "vsync", App->ui->Vsync);
-	node.SetNewJsonNumber(node.ValueToObject(node.GetRootValue()), "brightness", App->ui->screenBrightness);
-
-	return true;
 }
 void ModuleWindow::SetResizable(bool resizable)
 {

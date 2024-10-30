@@ -3,7 +3,6 @@
 #include "Globals.h"
 #include "glmath.h"
 #include "Light.h"
-#include "ModuleFBXLoader.h"
 
 #define MAX_LIGHTS 8
 
@@ -31,10 +30,6 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-	void DrawExampleMesh();
-
-	bool LoadConfig(JsonParsing& node) override;
-	bool SaveConfig(JsonParsing& node) const override;
 
 public:
 

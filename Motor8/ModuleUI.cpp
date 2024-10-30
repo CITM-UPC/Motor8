@@ -8,25 +8,23 @@
 #include "ImGui/imgui_impl_opengl2.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
-// Just a test to add a basic cube onto the map and test the wireframe option
-#include "Primitive.h"
-//
 #include "UI.h"
 #include "AboutMenu.h"
+
+// Test to add basic cube
+#include "Primitive.h"
 
 #pragma comment (lib, "glew/glew-2.2.0/lib/glew32.lib")
 
 ModuleUI::ModuleUI(bool start_enabled) : Module(start_enabled)
 {
-	name = "UI";
+
 }
 
 // Destructor
 ModuleUI::~ModuleUI()
-{
-}
+{}
 
-// Called before render is available
 bool ModuleUI::Init()
 {
 	//IMGUI start
@@ -38,7 +36,6 @@ bool ModuleUI::Init()
 	//io.ConfigFlags |= ImGuiConfigFlags_
 	//io.BackendFlags 
 	ImGui::StyleColorsDark();
-	
 
 
 	ImGuiStyle& style = ImGui::GetStyle();
@@ -46,18 +43,17 @@ bool ModuleUI::Init()
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL2_Init();
 
-	//Way to add menus to the menu list
-	menus.push_back(aboutMenu = new AboutMenu());
+	menus.push_back(aboutMenu = new AboutMenu); // to add menus to the menu list
 
 	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;
 	screenWidth = App->window->screen_surface->w;
+
 	return true;
 }
 
 bool ModuleUI::PreUpdate(float dt)
 {
-	
 	
 	return true;
 }
@@ -67,8 +63,9 @@ bool ModuleUI::Update(float dt)
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
-
+	
 	MainMenu();
+
 	for (std::vector<UI*>::iterator it = menus.begin(); it != menus.end(); ++it)
 	{
 		if ((*it)->IsActive())
@@ -76,27 +73,25 @@ bool ModuleUI::Update(float dt)
 			(*it)->Draw();
 		}
 	}
-	ImGui::Render();
-	ImGui::EndFrame();
-	ImGui::UpdatePlatformWindows();
 
+
+	ImGui::Render();
+	//ImGui::EndFrame();
+	//ImGui::UpdatePlatformWindows();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 
-	
 	return true;
 }
 
 bool ModuleUI::PostUpdate(float dt)
 {
 	
-
 	return true;
 }
 
 // Called before quitting
 bool ModuleUI::CleanUp()
 {
-
 	for (int i = 0; i < menus.size(); i++)
 	{
 		menus[i]->CleanUp();
@@ -125,67 +120,57 @@ void ModuleUI::MainMenu()
 			}
 			if (ImGui::MenuItem("Documentation"))
 			{
-				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/wiki");
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8");
 			}
 			if (ImGui::MenuItem("Download latest"))
 			{
-				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/releases");
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/releases");
 			}
 			if (ImGui::MenuItem("Report a bug"))
 			{
-				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/issues");
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/issues");
 			}
 			if (ImGui::MenuItem("Exit engine"))
 			{
 				exit(0);
 			}
-
-			ImGui::EndMenu();
+			ImGui::End();
 
 		}
 		if (ImGui::BeginMenu("Configuration"))
 		{
-			if (ImGui::MenuItem("Save"))
-			{
-				App->SaveConfigRequest();
-			}
-			if (ImGui::MenuItem("Load"))
-			{
-				App->LoadConfigRequest();
-			}
 			ImGui::EndMenu();
 
 		}
 		if (ImGui::BeginMenu("Application"))
 		{
-
 			ImGui::EndMenu();
+
 		}
 		if (ImGui::BeginMenu("Window"))
 		{
-			
-			if(ImGui::Checkbox("Fullscreen",&fullscreen))
+
+			if (ImGui::Checkbox("Fullscreen", &fullscreen))
 			{
 				App->window->SetFullscreen(fullscreen);
 			}
 			ImGui::SameLine();
 			if (ImGui::Checkbox("Vsync", &Vsync))
-			{
+			{ 
 				App->window->Vsync(Vsync);
 			}
 			if (ImGui::Checkbox("Resizable", &resizable))
 			{
-				//not done yet
+
 			}
 			ImGui::SameLine();
 			if (ImGui::Checkbox("Full Desktop", &FullDesktop))
 			{
-				//not done yet
+
 			}
 			if (ImGui::SliderInt("Width", &screenWidth, 640, 1920))
 			{
 				App->window->ModifyWidth(screenWidth);
-				
 			}
 			if (ImGui::SliderInt("Height", &screenHeight, 480, 1080))
 			{
@@ -221,16 +206,14 @@ void ModuleUI::MainMenu()
 			}
 			if (ImGui::Checkbox("GL_Depth_test", &App->renderer3D->atributes.Depth_test))
 			{
-		
+
 			}
 			if (ImGui::Checkbox("GL_Cull_face", &App->renderer3D->atributes.Cull_Face))
 			{
-				
 
 			}
 			if (ImGui::Checkbox("GL_Lightning", &App->renderer3D->atributes.Lightning))
 			{
-				
 
 			}
 			if (ImGui::Checkbox("GL_Color_material", &App->renderer3D->atributes.Color_Materials))
@@ -251,11 +234,6 @@ void ModuleUI::MainMenu()
 		{
 			if (ImGui::Checkbox("CreateTestCube", &testCube))
 			{
-
-			}
-			if (ImGui::MenuItem("Test mesh"))
-			{
-				App->renderer3D->DrawExampleMesh();
 			}
 			ImGui::EndMenu();
 

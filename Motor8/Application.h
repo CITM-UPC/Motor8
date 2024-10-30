@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Module.h"
 #include <list>
 #include <string>
@@ -11,15 +12,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModuleUI.h"
-#include "ModuleFBXLoader.h"
 #include "JsonParsing.h"
-#include "ModuleFileSystem.h"
-
-// USAR PARA STL: https://github.com/karansaxena/STL_Cheat_Sheets
-
-#define CONFIG_FILENAME	"config.json"
-#define APPLICATION_NAME "Motor8"
-#define ORGANIZATION_NAME "Motor8"
 
 class Application
 {
@@ -31,11 +24,6 @@ public:
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
-	ModuleFBXLoader* loaderModels;
-
-	ModuleFileSystem* fs;
-
-	JsonParsing jsonFile;
 
 	bool debug;
 private:
@@ -45,7 +33,7 @@ private:
 	float	dt;
 	bool saveRequest;
 	bool loadRequest;
-	
+
 public:
 
 	Application();
@@ -54,14 +42,7 @@ public:
 	bool Init();
 	bool Update();
 	bool CleanUp();
-
 	void RequestBrowser(const char* string);
-
-	inline const char* GetAppName() const { return APPLICATION_NAME; }
-	inline const char* GetOrganizationName() const { return ORGANIZATION_NAME; }
-
-	inline void SaveConfigRequest() { saveRequest = true; }
-	inline void LoadConfigRequest() { loadRequest = true; }
 
 private:
 

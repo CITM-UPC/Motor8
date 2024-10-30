@@ -49,10 +49,10 @@ public:
 };
 
 // ============================================
-class SpherePrimitive : public Primitive
+class Sphere : public Primitive
 {
 public:
-	SpherePrimitive(float radius, float rings, float sectors);
+	Sphere(float radius = 1.f, float mass = 1.f);
 
 protected:
 	void InnerRender() const;
