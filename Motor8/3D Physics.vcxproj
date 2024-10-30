@@ -41,13 +41,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(SolutionDir)json;$(SolutionDir)MathGeo\src;$(SolutionDir)PhysFS\include;$(SolutionDir)Assimp\include\assimp;$(SolutionDir)Assimp\include\assimp\Compiler;$(SolutionDir)Assimp\include\assimp\port\AndroidJNI;$(SolutionDir)Bugame\mmgr;$(SolutionDir)Optick\include;$(SolutionDir)DevIL\include\IL;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)SDL\libx86;$(SolutionDir)SDL_mixer\libx86;$(SolutionDir)Debug;$(SolutionDir)glew\glew-2.2.0\lib;$(SolutionDir)ImGui;$(SolutionDir)Bugame\MathGeo\lib;$(SolutionDir)PhysFS\lib;$(SolutionDir)Assimp\lib;$(SolutionDir)Optick\lib;$(SolutionDir)DevIL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(SolutionDir)json;$(SolutionDir)MathGeo\src;$(SolutionDir)PhysFS\include;$(SolutionDir)Assimp\include\assimp;$(SolutionDir)Assimp\include\assimp\Compiler;$(SolutionDir)Assimp\include\assimp\port\AndroidJNI;$(SolutionDir)Bugame\mmgr;$(SolutionDir)Optick\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL\libx86;$(SolutionDir)SDL_mixer\libx86;$(SolutionDir)Debug;$(SolutionDir)glew\glew-2.2.0\lib;$(SolutionDir)ImGui;$(SolutionDir)Bugame\MathGeo\lib;$(SolutionDir)PhysFS\lib;$(SolutionDir)Assimp\lib;$(SolutionDir)Optick\lib;$(LibraryPath)</LibraryPath>
     <TargetName>Bugame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(SolutionDir)json;$(SolutionDir)MathGeo\src;$(SolutionDir)PhysFS\include;$(SolutionDir)Assimp\include\assimp;$(SolutionDir)Assimp\include\assimp\Compiler;$(SolutionDir)Assimp\include\assimp\port\AndroidJNI;$(SolutionDir)Bugame\mmgr;$(SolutionDir)Optick\include;$(SolutionDir)DevIL\include\IL;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)SDL\libx86;$(SolutionDir)SDL_mixer\libx86;$(SolutionDir)Debug;$(SolutionDir)glew\glew-2.2.0\lib;$(SolutionDir)ImGui;$(SolutionDir)Bugame\MathGeo\lib;$(SolutionDir)PhysFS\lib;$(SolutionDir)Assimp\lib;$(SolutionDir)Optick\lib;$(SolutionDir)DevIL\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(SolutionDir)json;$(SolutionDir)MathGeo\src;$(SolutionDir)PhysFS\include;$(SolutionDir)Assimp\include\assimp;$(SolutionDir)Assimp\include\assimp\Compiler;$(SolutionDir)Assimp\include\assimp\port\AndroidJNI;$(SolutionDir)Bugame\mmgr;$(SolutionDir)Optick\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL\libx86;$(SolutionDir)SDL_mixer\libx86;$(SolutionDir)Debug;$(SolutionDir)glew\glew-2.2.0\lib;$(SolutionDir)ImGui;$(SolutionDir)Bugame\MathGeo\lib;$(SolutionDir)PhysFS\lib;$(SolutionDir)Assimp\lib;$(SolutionDir)Optick\lib;$(LibraryPath)</LibraryPath>
     <TargetName>Bugame</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -187,7 +187,6 @@
     <ClInclude Include="mmgr\mmgr.h" />
     <ClInclude Include="mmgr\nommgr.h" />
     <ClInclude Include="ModuleCamera3D.h" />
-    <ClInclude Include="ModuleFBXLoader.h" />
     <ClInclude Include="ModuleFileSystem.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="ModuleUI.h" />
@@ -303,7 +302,6 @@
     <ClCompile Include="mmgr\mmgr.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
-    <ClCompile Include="ModuleFBXLoader.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
