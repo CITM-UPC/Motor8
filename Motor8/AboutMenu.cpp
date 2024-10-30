@@ -17,9 +17,9 @@ void AboutMenu::Draw()
 	{
 		ImGui::SetNextWindowPos({ float(App->window->screen_surface->h - 130), 20 });
 		ImGui::SetWindowSize({ 600,700 });
-		ImGui::Text("Motor8");
-		ImGui::Text("The engine with no bugs :D");
-		ImGui::Text("By Marta Llurba & Kaede Sato Morales");
+		ImGui::Text("Motor8e");
+		ImGui::Text("We love this");
+		ImGui::Text("By Dani, Salva & Justo");
 		ImGui::NewLine();
 		ImGui::Text("3rd parties libraries used:");
 
