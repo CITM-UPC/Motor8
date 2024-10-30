@@ -104,6 +104,7 @@
     <ClInclude Include="json\parson.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MathGeo\src\Algorithm\GJK.h" />
+    <ClInclude Include="MathGeo\src\Algorithm\GJK2D.h" />
     <ClInclude Include="MathGeo\src\Algorithm\Random\LCG.h" />
     <ClInclude Include="MathGeo\src\Algorithm\SAT.h" />
     <ClInclude Include="MathGeo\src\Geometry\AABB.h" />
