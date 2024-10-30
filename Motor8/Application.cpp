@@ -1,10 +1,18 @@
 #include "Application.h"
+
 #include "Globals.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
+#include "ModuleFileSystem.h"
+#include "Resource.h"
+
+//#include "MathGeo/src/MathGeoLib.h"
+
+//#pragma comment (lib, "MathGeo/lib/MathGeoLib.lib")
+
 
 Application::Application() : debug(false)
 {
@@ -16,6 +24,8 @@ Application::Application() : debug(false)
 	ui = new ModuleUI();
 	audio = new ModuleAudio();
 
+	fs = new ModuleFileSystem(RESOURCES_FOLDER);
+	loaderModels = new ModuleFBXLoader();
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -26,13 +36,16 @@ Application::Application() : debug(false)
 	AddModule(input);
 	AddModule(audio);
 	AddModule(ui);
-
+	AddModule(loaderModels);
 	
 	// Scenes
 	AddModule(scene_intro);
 
 	// Renderer last!
 	AddModule(renderer3D);
+
+	loadRequest = false;
+	saveRequest = false;
 }
 
 Application::~Application()
@@ -43,33 +56,46 @@ Application::~Application()
 	{
 		RELEASE(*item);
 	}
+	RELEASE(fs);
+	list_modules.clear();
 }
 
 bool Application::Init()
 {
 	bool ret = true;
+
 	App = this;
 
+	//p2List_item<Module*>* item = list_modules.getFirst();
+
 	char* buffer = nullptr;
+	fs->Load(SETTINGS_FOLDER "config.json", &buffer);
 
 	if (buffer != nullptr)
 	{
+		JsonParsing jsonFile((const char*)buffer);
+		jsonFile.ValueToObject(jsonFile.GetRootValue());
+
 		std::list<Module*>::iterator item;
 
 		RELEASE_ARRAY(buffer);
-
 	}
 
-	//Call Init() in all modules
+	// Call Init() in all modules
 	std::list<Module*>::iterator item;
+	// After all Init calls we call Start() in all modules
 
-	//LOG("Application Init");
+	/*LOG_COMMENT("Application Init");*/
+
+	//LOG_COMMENT("Application Start --------------");
+	//item = list_modules.getFirst();
+
 
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
 		ret = (*item)->Init();
 		ret = (*item)->Start();
-
+		/*ret = (*item)->Init();*/
 	}
 
 	return ret;
@@ -85,11 +111,15 @@ void Application::PrepareUpdate()
 // ---------------------------------------------
 void Application::FinishUpdate()
 {
+	if (loadRequest) LoadConfig();
+	if (saveRequest) SaveConfig();
 }
 
 // Call PreUpdate, Update and PostUpdate on all modules
 bool Application::Update()
 {
+	//---------------------------------------
+
 	bool ret = true;
 	PrepareUpdate();
 
@@ -98,7 +128,6 @@ bool Application::Update()
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
 		ret = (*item)->PreUpdate(dt);
-
 	}
 
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
@@ -109,7 +138,6 @@ bool Application::Update()
 	for (item = list_modules.begin(); item != list_modules.end() && ret; ++item)
 	{
 		ret = (*item)->PostUpdate();
-
 	}
 
 	FinishUpdate();
@@ -125,12 +153,13 @@ bool Application::CleanUp()
 	{
 		ret = (*item)->CleanUp();
 	}
+
 	return ret;
 }
 
 void Application::AddModule(Module* mod)
 {
-	list_modules.push_back(mod);	
+	list_modules.push_back(mod);
 }
 
 void Application::SaveConfig()
@@ -141,13 +170,23 @@ void Application::SaveConfig()
 
 	// Call Init() in all modules
 	std::list<Module*>::iterator item;
+
 	for (item = list_modules.begin(); item != list_modules.end(); ++item)
 	{
 		(*item)->SaveConfig(jsonFile.SetChild(jsonFile.GetRootValue(), (*item)->name));
 	}
+
 	char* buf;
 	uint size = jsonFile.Save(&buf);
+
+	if (fs->Save(SETTINGS_FOLDER CONFIG_FILENAME, buf, size) > 0)
+	{
+		LOG_COMMENT("Saved Engine Preferences");
+	}
+		
+
 	RELEASE_ARRAY(buf);
+
 	//jsonFile.SerializeFile(root, CONFIG_FILENAME);
 	saveRequest = false;
 }
@@ -157,26 +196,28 @@ void Application::LoadConfig()
 	LOG_COMMENT("Loading configuration");
 
 	char* buffer = nullptr;
+	fs->Load(SETTINGS_FOLDER "config.json", &buffer);
 
 	if (buffer != nullptr)
 	{
 		JsonParsing jsonFile((const char*)buffer);
 		jsonFile.ValueToObject(jsonFile.GetRootValue());
+
 		std::list<Module*>::iterator item;
+
 		for (item = list_modules.begin(); item != list_modules.end(); ++item)
 		{
 			(*item)->LoadConfig(jsonFile.GetChild(jsonFile.GetRootValue(), (*item)->name));
 		}
+
 		RELEASE_ARRAY(buffer);
 	}
+
 	loadRequest = false;
 }
-
 void Application::RequestBrowser(const char* string)
 {
 	const char* link = string;
-	ShellExecute(NULL, "open", link, NULL, NULL, SW_SHOWNORMAL);
+	ShellExecuteA(NULL,"open",link, NULL, NULL,SW_SHOWNORMAL);
 }
-
-
 Application* App = nullptr;

@@ -10,6 +10,8 @@
 
 ModuleRenderer3D::ModuleRenderer3D(bool start_enabled) : Module(start_enabled)
 {
+	name = "Renderer";
+
 	atributes.Depth_test = true;
 	atributes.Cull_Face = true;
 	atributes.Lightning = true;
@@ -198,6 +200,47 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
+void ModuleRenderer3D::DrawExampleMesh()
+{
+	VertexData newMesh;
+	newMesh = App->loaderModels->LoadMesh("Assets/warrior.FBX");
+	
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindBuffer(GL_ARRAY_BUFFER, newMesh.id_vertex);
+	glVertexPointer(3, GL_FLOAT, 0, newMesh.vertex);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh.id_index);
+	glDrawElements(GL_TRIANGLES, newMesh.num_index, GL_UNSIGNED_INT, newMesh.index);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+bool ModuleRenderer3D::LoadConfig(JsonParsing& node)
+{
+	atributes.Depth_test = node.GetJsonBool("depth test");
+	atributes.Cull_Face = node.GetJsonBool("cull face");
+	atributes.Lightning = node.GetJsonBool("lightning");
+	atributes.Color_Materials = node.GetJsonBool("color materials");
+	atributes.Texture_2D = node.GetJsonBool("texture 2D");
+	atributes.Front = node.GetJsonBool("front");
+	atributes.AmbientOclussion = node.GetJsonBool("ambient oclussion");
+	atributes.Wireframe = node.GetJsonBool("wireframe");
+	return true;
+}
+
+bool ModuleRenderer3D::SaveConfig(JsonParsing& node) const
+{
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "depth test", atributes.Depth_test);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "cull face", atributes.Cull_Face);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "lightning", atributes.Lightning);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "color materials", atributes.Color_Materials);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "texture 2D", atributes.Texture_2D);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "front", atributes.Front);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "ambient oclussion", atributes.AmbientOclussion);
+	node.SetNewJsonBool(node.ValueToObject(node.GetRootValue()), "wireframe", atributes.Wireframe);
+	
+	return true;
+}
 
 void ModuleRenderer3D::OnResize(int width, int height)
 {
