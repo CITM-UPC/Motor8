@@ -6,7 +6,6 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
-	name = "Scene";
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
