@@ -6,6 +6,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
+	name = "Scene";
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -46,6 +47,9 @@ bool ModuleSceneIntro::Update(float dt)
 	if (App->ui->testCube)
 	{
 		Cube c(0.5, 0.5, 0.5);
+
+		//SpherePrimitive s(1, 12, 24);
+
 	}
 
 
