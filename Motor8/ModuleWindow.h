@@ -23,6 +23,9 @@ public:
 	void ModifyWidth(int x);
 	void ModifyHeight(int y);
 	void Vsync(bool vsync);
+	void ModifyBrightness(float brightness);
+	void SetResizable(bool resizable);
+	void SetFullDesktop(bool fullDesktop);
 
 public:
 	//The window we'll be rendering to

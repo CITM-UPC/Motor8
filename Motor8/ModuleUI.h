@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "SDL/include/SDL.h"
+#include "ModuleWindow.h"
 #include <vector>
 
 class Application;
@@ -29,8 +30,12 @@ public:
 
 	bool fullscreen = false;
 	bool Vsync = false;
-	int screenWidth = 1920;
-	int screenHeight = 1080;
+	bool resizable = false;
+	bool FullDesktop = false;
+	int screenWidth;
+	int screenHeight;
+	float screenBrightness;
+	bool testCube = false;
 
 	bool enableAboutMenu;
 

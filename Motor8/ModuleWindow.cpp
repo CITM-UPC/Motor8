@@ -114,3 +114,21 @@ void ModuleWindow::Vsync(bool vsync)
 {
 	vsync = SDL_HINT_RENDER_VSYNC;
 }
+
+void ModuleWindow::ModifyBrightness(float brightness)
+{
+	int result = SDL_SetWindowBrightness(window, brightness);
+
+	if (result != 0)
+	{
+		LOG_COMMENT("Setting Brightness Value");
+	}
+}
+void ModuleWindow::SetResizable(bool resizable)
+{
+
+}
+void ModuleWindow::SetFullDesktop(bool fullDesktop)
+{
+
+}

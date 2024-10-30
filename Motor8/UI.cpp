@@ -14,3 +14,8 @@ bool UI::IsActive() const
 {
 	return active;
 }
+
+void UI::switchActive()
+{
+	active = !active;
+}

@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
+#include "ModuleUI.h"
 
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
@@ -42,12 +43,9 @@ bool ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 
-	if (App->debug == true)
+	if (App->ui->testCube)
 	{
-		if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-		{
-
-		}
+		Cube c(0.5, 0.5, 0.5);
 	}
 
 

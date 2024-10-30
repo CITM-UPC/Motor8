@@ -42,6 +42,7 @@ public:
 	bool Init();
 	bool Update();
 	bool CleanUp();
+	void RequestBrowser(const char* string);
 
 private:
 

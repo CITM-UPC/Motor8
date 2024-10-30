@@ -11,6 +11,9 @@
 #include "UI.h"
 #include "AboutMenu.h"
 
+// Test to add basic cube
+#include "Primitive.h"
+
 #pragma comment (lib, "glew/glew-2.2.0/lib/glew32.lib")
 
 ModuleUI::ModuleUI(bool start_enabled) : Module(start_enabled)
@@ -39,6 +42,12 @@ bool ModuleUI::Init()
 
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL2_Init();
+
+	menus.push_back(aboutMenu = new AboutMenu); // to add menus to the menu list
+
+	screenBrightness = 1.0f;
+	screenHeight = App->window->screen_surface->h;
+	screenWidth = App->window->screen_surface->w;
 
 	return true;
 }
@@ -102,13 +111,30 @@ void ModuleUI::MainMenu()
 	//MENUS 
 	ImGui::BeginMainMenuBar();
 	{
-		if (ImGui::BeginMenu("GeneralStuff"))
+		if (ImGui::BeginMenu("Help"))
 		{
-			if (ImGui::Checkbox("AboutMenu", &enableAboutMenu))
+			ImGui::SetNextWindowBgAlpha(1.0f);
+			if(ImGui::MenuItem("About..."))
 			{
-				aboutMenu->active = enableAboutMenu;
+				aboutMenu->switchActive();
 			}
-			ImGui::EndMenu();
+			if (ImGui::MenuItem("Documentation"))
+			{
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8");
+			}
+			if (ImGui::MenuItem("Download latest"))
+			{
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/releases");
+			}
+			if (ImGui::MenuItem("Report a bug"))
+			{
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/issues");
+			}
+			if (ImGui::MenuItem("Exit engine"))
+			{
+				exit(0);
+			}
+			ImGui::End();
 
 		}
 		if (ImGui::BeginMenu("Configuration"))
@@ -128,9 +154,19 @@ void ModuleUI::MainMenu()
 			{
 				App->window->SetFullscreen(fullscreen);
 			}
+			ImGui::SameLine();
 			if (ImGui::Checkbox("Vsync", &Vsync))
 			{ 
 				App->window->Vsync(Vsync);
+			}
+			if (ImGui::Checkbox("Resizable", &resizable))
+			{
+
+			}
+			ImGui::SameLine();
+			if (ImGui::Checkbox("Full Desktop", &FullDesktop))
+			{
+
 			}
 			if (ImGui::SliderInt("Width", &screenWidth, 640, 1920))
 			{
@@ -139,6 +175,10 @@ void ModuleUI::MainMenu()
 			if (ImGui::SliderInt("Height", &screenHeight, 480, 1080))
 			{
 				App->window->ModifyHeight(screenHeight);
+			}
+			if (ImGui::SliderFloat("Brightness", &screenBrightness, 0.0001f, 1.0001f))
+			{
+				App->window->ModifyBrightness(screenBrightness);
 			}
 
 			ImGui::EndMenu();
@@ -160,28 +200,43 @@ void ModuleUI::MainMenu()
 		}
 		if (ImGui::BeginMenu("Render options"))
 		{
-
-			if (ImGui::Checkbox("GL_Depth_test", &fullscreen))
+			if (ImGui::Checkbox("Wireframe Mode", &App->renderer3D->atributes.Wireframe))
 			{
 
 			}
-			if (ImGui::Checkbox("GL_Cull_face", &fullscreen))
+			if (ImGui::Checkbox("GL_Depth_test", &App->renderer3D->atributes.Depth_test))
 			{
 
 			}
-			if (ImGui::Checkbox("GL_Lightning", &fullscreen))
+			if (ImGui::Checkbox("GL_Cull_face", &App->renderer3D->atributes.Cull_Face))
 			{
 
 			}
-			if (ImGui::Checkbox("GL_Color_material", &fullscreen))
+			if (ImGui::Checkbox("GL_Lightning", &App->renderer3D->atributes.Lightning))
 			{
 
 			}
-			if (ImGui::Checkbox("GL_Color_material", &fullscreen))
+			if (ImGui::Checkbox("GL_Color_material", &App->renderer3D->atributes.Color_Materials))
+			{
+
+			}
+			if (ImGui::Checkbox("GL_Front", &App->renderer3D->atributes.Front))
+			{
+
+			}
+			if (ImGui::Checkbox("GL_AmbientOclussion", &App->renderer3D->atributes.AmbientOclussion))
 			{
 
 			}
 			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Primitives_test"))
+		{
+			if (ImGui::Checkbox("CreateTestCube", &testCube))
+			{
+			}
+			ImGui::EndMenu();
+
 		}
 	}
 	ImGui::EndMainMenuBar();

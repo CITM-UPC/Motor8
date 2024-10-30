@@ -59,11 +59,6 @@ void Primitive::Render() const
 
 	glColor3f(color.r, color.g, color.b);
 
-	if(wire)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	else
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
 	InnerRender();
 
 	glPopMatrix();
@@ -113,6 +108,28 @@ Cube::Cube() : Primitive(), size(1.0f, 1.0f, 1.0f)
 Cube::Cube(float sizeX, float sizeY, float sizeZ) : Primitive(), size(sizeX, sizeY, sizeZ)
 {
 	type = PrimitiveTypes::Primitive_Cube;
+	GLfloat vertices[] = { sizeX, sizeY, sizeZ,  -sizeX, sizeY, sizeZ,  -sizeX,-sizeY, sizeZ,   sizeX,-sizeY, sizeZ,   // v0,v1,v2,v3 (front)
+							sizeX, sizeY, sizeZ,   sizeX,-sizeY, sizeZ,   sizeX,-sizeY,-sizeZ,   sizeX, sizeY,-sizeZ,   // v0,v3,v4,v5 (right)
+							sizeX, sizeY, sizeZ,   sizeX, sizeY,-sizeZ,  -sizeX, sizeY,-sizeZ,  -sizeX, sizeY, sizeZ,   // v0,v5,v6,v1 (top)
+						  -sizeX, sizeY, sizeZ,  -sizeX, sizeY,-sizeZ,  -sizeX,-sizeY,-sizeZ,  -sizeX,-sizeY, sizeZ,   // v1,v6,v7,v2 (left)
+						  -sizeX,-sizeY,-sizeZ,   sizeX,-sizeY,-sizeZ,   sizeX,-sizeY, sizeZ,  -sizeX,-sizeY, sizeZ,   // v7,v4,v3,v2 (bottom)
+							sizeX,-sizeY,-sizeZ,  -sizeX,-sizeY,-sizeZ,  -sizeX, sizeY,-sizeZ,   sizeX, sizeY,-sizeZ }; // v4,v7,v6,v5 (back)
+
+	GLubyte indices[] = { 0, 1, 2,   2, 3, 0,      // front
+					   4, 5, 6,   6, 7, 4,      // right
+					   8, 9,10,  10,11, 8,      // top
+					  12,13,14,  14,15,12,      // left
+					  16,17,18,  18,19,16,      // bottom
+					  20,21,22,  22,23,20 };    // back
+
+	// activate and specify pointer to vertex array
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+	// Draw a cube
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, indices);
+
+	// deactivate vertez arrays after drawing
+	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 void Cube::InnerRender() const

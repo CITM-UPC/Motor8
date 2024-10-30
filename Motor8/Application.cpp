@@ -130,7 +130,7 @@ bool Application::CleanUp()
 
 void Application::AddModule(Module* mod)
 {
-	list_modules.push_back(mod);
+	list_modules.push_back(mod);	
 }
 
 void Application::SaveConfig()
@@ -170,6 +170,12 @@ void Application::LoadConfig()
 		RELEASE_ARRAY(buffer);
 	}
 	loadRequest = false;
+}
+
+void Application::RequestBrowser(const char* string)
+{
+	const char* link = string;
+	ShellExecute(NULL, "open", link, NULL, NULL, SW_SHOWNORMAL);
 }
 
 
