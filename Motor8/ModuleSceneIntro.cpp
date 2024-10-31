@@ -57,6 +57,7 @@ bool ModuleSceneIntro::Update(float dt)
 	{
 		primitives[n]->Update();
 	}
+	App->renderer3D->DrawExampleMesh(true);
 
 	return true;
 }

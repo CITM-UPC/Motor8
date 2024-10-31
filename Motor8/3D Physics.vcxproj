@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -43,7 +43,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(SolutionDir)json;$(SolutionDir)MathGeo\src;$(SolutionDir)PhysFS\include;$(SolutionDir)Assimp\include\assimp;$(SolutionDir)Assimp\include\assimp\Compiler;$(SolutionDir)Assimp\include\assimp\port\AndroidJNI;$(SolutionDir)Bugame\mmgr;$(SolutionDir)Optick\include;$(SolutionDir)DevIL\include\IL;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)SDL\libx86;$(SolutionDir)SDL_mixer\libx86;$(SolutionDir)Debug;$(SolutionDir)glew\glew-2.2.0\lib;$(SolutionDir)ImGui;$(SolutionDir)Bugame\MathGeo\lib;$(SolutionDir)PhysFS\lib;$(SolutionDir)Assimp\lib;$(SolutionDir)Optick\lib;$(SolutionDir)DevIL\lib;$(LibraryPath)</LibraryPath>
-    <TargetName>Motor8</TargetName>
+    <TargetName>Bugame</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(SolutionDir)json;$(SolutionDir)MathGeo\src;$(SolutionDir)PhysFS\include;$(SolutionDir)Assimp\include\assimp;$(SolutionDir)Assimp\include\assimp\Compiler;$(SolutionDir)Assimp\include\assimp\port\AndroidJNI;$(SolutionDir)Bugame\mmgr;$(SolutionDir)Optick\include;$(SolutionDir)DevIL\include\IL;$(IncludePath)</IncludePath>

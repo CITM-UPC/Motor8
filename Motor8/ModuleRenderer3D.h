@@ -31,7 +31,7 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-	void DrawExampleMesh();
+	void DrawExampleMesh(bool hasTexture);
 
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;

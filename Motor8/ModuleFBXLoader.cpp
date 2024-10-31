@@ -34,6 +34,8 @@ bool ModuleFBXLoader::Init()
 	stream = aiGetPredefinedLogStream(aiDefaultLogStream_DEBUGGER, nullptr);
 	aiAttachLogStream(&stream);
 
+	LoadMesh("Assets/BakerHouse.fbx", "Assets/Resources/Baker_House.png");
+
 	return true;
 }
 
@@ -45,17 +47,18 @@ bool ModuleFBXLoader::CleanUp()
 	// detach log stream
 	aiDetachAllLogStreams();
 
-	//LoadMesh("Assets/BakerHouse.fbx");
-
 	return true;
 }
 
-bool ModuleFBXLoader::LoadMesh(const char* file_path)
+bool ModuleFBXLoader::LoadMesh(const char* file_path, const char* texturePath)
 {
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		VertexData NewMesh;
+		VertexData* NewMaterial = new VertexData();
+		bool importMaterial = App->materialImport->Import("Assets/Resources/Baker_House.png", NewMaterial);
+
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 		{
@@ -90,13 +93,35 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path)
 						memcpy(&NewMesh.index[z * 3], scene->mMeshes[i]->mFaces[z].mIndices, 3 * sizeof(uint));
 					}
 				}
+				glGenBuffers(1, &NewMesh.id_index);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh.id_index);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_index, NewMesh.index, GL_STATIC_DRAW);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 			}
-		}
-		glGenBuffers(1, &NewMesh.id_index);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NewMesh.id_index);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint) * NewMesh.num_index, NewMesh.index, GL_STATIC_DRAW);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			if (scene->mMeshes[i]->HasTextureCoords(0))
+			{
+				NewMesh.num_uvs = (scene->mMeshes[i]->mNumVertices);
 
+				NewMesh.textCords = new float[NewMesh.num_uvs * 3];
+
+				memcpy(NewMesh.textCords, scene->mMeshes[i]->mTextureCoords[0], NewMesh.num_uvs * sizeof(float3));
+
+				int x = scene->mMeshes[i]->mNumUVComponents[0];
+			}
+			NewMesh.texture_data.id = scene->mMeshes[i]->mMaterialIndex;
+
+			glGenBuffers(1, &(NewMesh.id_uvs));
+			glBindBuffer(GL_ARRAY_BUFFER, NewMesh.id_uvs);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * NewMesh.num_uvs * 3, NewMesh.textCords, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		}
+
+		if (texturePath != nullptr)
+		{
+			App->materialImport->Import(texturePath, &NewMesh);
+		}
+
+		meshes.push_back(NewMesh);
 		meshes.push_back(NewMesh);
 		return true;
 	}
@@ -106,86 +131,6 @@ bool ModuleFBXLoader::LoadMesh(const char* file_path)
 	}
 
 	aiReleaseImport(scene);
-
-	//---------------------------------------------------------------------------------------------
-	//char* buffer = nullptr;
-	//uint file_size = App->fs->Load(file_path, &buffer);
-	//if (file_size > 0)
-	//{
-	//	const aiScene* scene = aiImportFileFromMemory(buffer, file_size, aiProcessPreset_TargetRealtime_MaxQuality, nullptr);
-
-	//	if (scene == nullptr || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
-	//	{
-
-	//	}
-
-	//	for (uint i = 0; i < scene->mRootNode->mNumMeshes; i++)
-	//	{
-	//		aiMesh* aimesh = scene->mMeshes[scene->mRootNode->mMeshes[i]];
-
-	//		if (aimesh != nullptr && aimesh->HasFaces())
-	//		{
-	//			VertexData newMesh;
-
-	//			uint vertices_size = aimesh->mNumVertices * 3;
-	//			newMesh.vertices.resize(vertices_size);
-
-	//			uint normals_size = aimesh->mNumVertices * 3;
-	//			newMesh.normals.resize(normals_size);
-
-	//			uint indices_size = aimesh->mNumFaces * 3;
-	//			newMesh.indices.resize(indices_size);
-
-	//			if (aimesh->HasPositions())
-	//			{
-	//				memcpy(&newMesh.vertices[0], aimesh->mVertices, sizeof(float) * vertices_size);
-	//			}
-
-	//			if (aimesh->HasNormals())
-	//			{
-	//				memcpy(&newMesh.normals[0], aimesh->mNormals, sizeof(float) * normals_size);
-	//			}
-
-	//			if (aimesh->HasFaces())
-	//			{
-	//				uint ind = 0;
-
-	//				for (uint i = 0; i < aimesh->mNumFaces; i++)
-	//				{
-	//					aiFace face = aimesh->mFaces[i];
-
-	//					if (face.mNumIndices == 3)
-	//					{
-	//						for (uint j = 0; j < face.mNumIndices; j++)
-	//						{
-	//							newMesh.indices[ind] = face.mIndices[j];
-	//							ind++;
-	//						}
-	//					}
-	//				}
-	//			}
-
-	//			//Poner un metodo para que si newMesh != nullptr
-	//			//Haga un push_back de la (newMesh) en un vecto mesh
-	//			//Y que borre la newMesh:
-	//			//delete newMesh
-	//			//newMesh = nullptr
-
-	//			if (newMesh != nullptr)
-	//			{
-	//				meshes.push_back(newMesh);
-	//			}
-	//			else
-	//			{
-	//				delete newMesh;
-	//				newMesh = nullptr;
-	//			}
-
-	//			return newMesh;
-	//		}
-	//	}
-
-	//}
 
 }
 

@@ -19,8 +19,8 @@
 // USAR PARA STL: https://github.com/karansaxena/STL_Cheat_Sheets
 
 #define CONFIG_FILENAME	"config.json"
-#define APPLICATION_NAME "Motor8 Engine"
-#define ORGANIZATION_NAME "Motor8 Studios"
+#define APPLICATION_NAME "Motor8"
+#define ORGANIZATION_NAME "Motor8"
 
 class Application
 {

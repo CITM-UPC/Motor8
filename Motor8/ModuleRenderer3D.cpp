@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
+#include "ModuleMaterials.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -112,6 +113,8 @@ bool ModuleRenderer3D::Init()
 	}
 	LOG_COMMENT("Glew version: %s\n", glewGetString(GLEW_VERSION));
 
+	App->materialImport->Init();
+
 	return ret;
 }
 
@@ -193,8 +196,6 @@ bool ModuleRenderer3D::PreUpdate(float dt)
 // PostUpdate present buffer to screen
 bool ModuleRenderer3D::PostUpdate()
 {
-	DrawExampleMesh();
-
 	SDL_GL_SwapWindow(App->window->window);
 	return true;
 }
@@ -209,7 +210,7 @@ bool ModuleRenderer3D::CleanUp()
 	return true;
 }
 
-void ModuleRenderer3D::DrawExampleMesh()
+void ModuleRenderer3D::DrawExampleMesh(bool hasTexture)
 {
 	for(int i = 0; i < App->loaderModels->meshes.size(); i++)
 	{
@@ -217,14 +218,21 @@ void ModuleRenderer3D::DrawExampleMesh()
 		VertexData* newMesh = &App->loaderModels->meshes[i];
 		{
 			glEnableClientState(GL_VERTEX_ARRAY);
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 			// Render things in Element mode
 			glBindBuffer(GL_ARRAY_BUFFER, newMesh->id_vertex);
 			glVertexPointer(3, GL_FLOAT, 0, NULL);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, newMesh->id_index);
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glBindBuffer(GL_ARRAY_BUFFER, newMesh->id_uvs);
+			glTexCoordPointer(3, GL_FLOAT, 0, NULL);
+			glBindTexture(GL_TEXTURE_2D, newMesh->texture_data.id);
 			glDrawElements(GL_TRIANGLES, newMesh->num_index, GL_UNSIGNED_INT, NULL);
+			glBindTexture(GL_TEXTURE_2D, 0);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 			glDisableClientState(GL_VERTEX_ARRAY);
 		}
 	}
