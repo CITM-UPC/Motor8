@@ -22,8 +22,6 @@ Application::Application() : debug(false)
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	ui = new ModuleUI();
-	audio = new ModuleAudio();
-
 	fs = new ModuleFileSystem(RESOURCES_FOLDER);
 	loaderModels = new ModuleFBXLoader();
 	materialImport = new ModuleMaterial();
@@ -35,7 +33,6 @@ Application::Application() : debug(false)
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
-	AddModule(audio);
 		
 	// Scenes
 	AddModule(scene_intro);
