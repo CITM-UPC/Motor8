@@ -123,26 +123,26 @@ void ModuleUI::MainMenu()
 		if (ImGui::BeginMenu("Help"))
 		{
 			/*ImGui::SetNextWindowBgAlpha(1.0f);
-			if(ImGui::MenuItem("About..."))
-			{
-				aboutMenu->switchActive();
-			}
-			if (ImGui::MenuItem("Documentation"))
-			{
-				App->RequestBrowser("https://github.com/CITM-UPC/Motor8");
-			}
-			if (ImGui::MenuItem("Download latest"))
-			{
-				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/releases");
-			}
-			if (ImGui::MenuItem("Report a bug"))
-			{
-				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/issues");
-			}
-			if (ImGui::MenuItem("Exit engine"))
-			{
-				exit(0);
-			}*/
+				if(ImGui::MenuItem("About..."))
+				{
+					aboutMenu->switchActive();
+				}
+				if (ImGui::MenuItem("Documentation"))
+				{
+					App->RequestBrowser("https://github.com/CITM-UPC/Motor8");
+				}
+				if (ImGui::MenuItem("Download latest"))
+				{
+					App->RequestBrowser("https://github.com/CITM-UPC/Motor8/releases");
+				}
+				if (ImGui::MenuItem("Report a bug"))
+				{
+					App->RequestBrowser("https://github.com/CITM-UPC/Motor8/issues");
+				}
+				if (ImGui::MenuItem("Exit engine"))
+				{
+					exit(0);
+				}*/
 
 			ImGui::EndMenu();
 

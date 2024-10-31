@@ -59,9 +59,10 @@ int main(int argc, char ** argv)
 				LOG_COMMENT("Application Update exits with ERROR");
 				state = MAIN_EXIT;
 			}
-
+			
 			if (update_return == false)
 				state = MAIN_FINISH;
+			
 		}
 			break;
 

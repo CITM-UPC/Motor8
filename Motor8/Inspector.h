@@ -9,6 +9,11 @@ public:
 	InspectorMenu();
 	virtual ~InspectorMenu();
 
+	ModuleGameObject* GetSelectedGameObject();
+	void DrawInfoOfGameObject(ModuleGameObject* game_object);
+
 	void Draw() override;
+
+	ModuleGameObject* selectedGameObject;
 };
 #endif // !_ABOUT_MENU_H

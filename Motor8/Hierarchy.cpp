@@ -68,13 +68,3 @@ void Hierarchy::PopUpOptions()
 	}
 
 }
-void Hierarchy::ProcessGameObject(ModuleGameObject* gameObject)
-{
-	ImGui::TreeNodeEx(gameObject->GetName().c_str());
-	{
-		if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
-		{
-			gameObject->SelectItem();
-		}
-	}
-}
