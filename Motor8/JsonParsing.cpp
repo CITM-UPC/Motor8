@@ -71,7 +71,7 @@ JSON_Status JsonParsing::SetNewJson3Number(JsonParsing& node, const char* name, 
 
 	json_array_append_number(array, number.x);
 	json_array_append_number(array, number.y);
-
+	
 	return json_array_append_number(array, number.z);
 }
 
@@ -114,18 +114,16 @@ size_t JsonParsing::ParseFile(const char* fileName)
 {
 	JSON_Value* config = json_parse_file(fileName);
 	rootObject = config;
-
+	
 	return json_serialization_size(rootObject);
 }
 
 JSON_Object* JsonParsing::ValueToObject(JSON_Value* value) const
 {
 	JSON_Object* object = json_value_get_object(value);
-
-	if (object != NULL)
+	
+	if(object != NULL)
 		return object;
-
-	/*LOG_COMMENT("Object has not been retrieved");*/
 
 	return nullptr;
 }
@@ -157,10 +155,10 @@ bool JsonParsing::GetJsonBool(const char* name) const
 
 JsonParsing JsonParsing::GetChild(JSON_Value* parent, const char* name)
 {
-	JsonParsing child;
-
+	JsonParsing child; 
+	
 	child.rootObject = json_object_get_value(ValueToObject(rootObject), name);
-
+	
 	return child;
 }
 
@@ -168,8 +166,6 @@ JsonParsing JsonParsing::GetJsonArrayValue(JSON_Array* array, int index) const
 {
 	return JsonParsing(json_array_get_value(array, index));
 }
-
-//Posible error de mathgeo !
 
 float3 JsonParsing::GetJson3Number(JsonParsing& node, const char* name)
 {
@@ -199,8 +195,6 @@ JSON_Object* JsonParsing::GetJsonObject(JSON_Object* parentObject, const char* n
 	JSON_Object* object = json_object_get_object(parentObject, node);
 
 	if (object) return object;
-
-	/*LOG_COMMENT("Node object has not been found");*/
 
 	return nullptr;
 }

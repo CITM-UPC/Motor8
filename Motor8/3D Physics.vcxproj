@@ -20,7 +20,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -186,8 +186,13 @@
     <ClInclude Include="MathGeo\tests\TestData.h" />
     <ClInclude Include="MathGeo\tests\TestRunner.h" />
     <ClInclude Include="ModuleCamera3D.h" />
+    <ClInclude Include="ModuleComponent.h" />
+    <ClInclude Include="ModuleComponentMaterial.h" />
+    <ClInclude Include="ModuleComponentMesh.h" />
+    <ClInclude Include="ModuleComponentTransform.h" />
     <ClInclude Include="ModuleFBXLoader.h" />
     <ClInclude Include="ModuleFileSystem.h" />
+    <ClInclude Include="ModuleGameObject.h" />
     <ClInclude Include="ModuleMaterials.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="ModuleUI.h" />
@@ -299,8 +304,12 @@
     <ClCompile Include="MathGeo\tests\VectorTests.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
+    <ClCompile Include="ModuleComponent.cpp" />
+    <ClCompile Include="ModuleComponentMaterial.cpp" />
+    <ClCompile Include="ModuleComponentTransform.cpp" />
     <ClCompile Include="ModuleFBXLoader.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
+    <ClCompile Include="ModuleGameObject.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleMaterials.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />

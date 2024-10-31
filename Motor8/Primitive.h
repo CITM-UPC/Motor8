@@ -29,7 +29,7 @@ public:
 	Color color;
 	mat4x4 transform;
 	bool axis,wire;
-	
+
 protected:
 	virtual void InnerRender() const;
 	PrimitiveTypes type;
@@ -52,7 +52,7 @@ public:
 class SpherePrimitive : public Primitive
 {
 public:
-	SpherePrimitive(float radius, float rings, float sectors);
+	SpherePrimitive(float radius, float rings,float sectors);
 
 protected:
 	void InnerRender() const;

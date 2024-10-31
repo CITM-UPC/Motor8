@@ -55,6 +55,12 @@
     <Filter Include="Sources\Tools\Assimp">
       <UniqueIdentifier>{44204457-c09e-41e3-8902-b15dad8c4486}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\Modules\GameObjects">
+      <UniqueIdentifier>{9a554feb-7be5-483c-b029-dd11bf849535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Modules\GameObjects\Components">
+      <UniqueIdentifier>{7387ffab-c541-4cf0-a126-9f1320465879}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -396,6 +402,21 @@
     <ClInclude Include="ModuleMaterials.h">
       <Filter>Sources\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleGameObject.h">
+      <Filter>Sources\Modules\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleComponent.h">
+      <Filter>Sources\Modules\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleComponentMaterial.h">
+      <Filter>Sources\Modules\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleComponentMesh.h">
+      <Filter>Sources\Modules\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleComponentTransform.h">
+      <Filter>Sources\Modules\GameObjects\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -721,6 +742,18 @@
     </ClCompile>
     <ClCompile Include="ModuleMaterials.cpp">
       <Filter>Sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleGameObject.cpp">
+      <Filter>Sources\Modules\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponent.cpp">
+      <Filter>Sources\Modules\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponentMaterial.cpp">
+      <Filter>Sources\Modules\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponentTransform.cpp">
+      <Filter>Sources\Modules\GameObjects\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -8,9 +8,7 @@
 #include "ImGui/imgui_impl_opengl2.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
-// Just a test to add a basic cube onto the map and test the wireframe option
 #include "Primitive.h"
-//
 #include "UI.h"
 #include "AboutMenu.h"
 
@@ -33,10 +31,7 @@ bool ModuleUI::Init()
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
-	//io.ConfigFlags |= ImGuiConfigFlags_
-	//io.BackendFlags 
 	ImGui::StyleColorsDark();
 	
 
@@ -57,13 +52,12 @@ bool ModuleUI::Init()
 
 bool ModuleUI::PreUpdate(float dt)
 {
-	
-	
 	return true;
 }
 
 bool ModuleUI::Update(float dt)
 {
+
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
@@ -118,14 +112,14 @@ void ModuleUI::MainMenu()
 	{
 		if (ImGui::BeginMenu("Help"))
 		{
-			ImGui::SetNextWindowBgAlpha(1.0f);
+			/*ImGui::SetNextWindowBgAlpha(1.0f);
 			if(ImGui::MenuItem("About..."))
 			{
 				aboutMenu->switchActive();
 			}
 			if (ImGui::MenuItem("Documentation"))
 			{
-				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/wiki");
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8");
 			}
 			if (ImGui::MenuItem("Download latest"))
 			{
@@ -138,18 +132,18 @@ void ModuleUI::MainMenu()
 			if (ImGui::MenuItem("Exit engine"))
 			{
 				exit(0);
-			}
+			}*/
 
 			ImGui::EndMenu();
 
 		}
 		if (ImGui::BeginMenu("Configuration"))
 		{
-			if (ImGui::MenuItem("Save"))
+			if (ImGui::MenuItem("Save Config"))
 			{
 				App->SaveConfigRequest();
 			}
-			if (ImGui::MenuItem("Load"))
+			if (ImGui::MenuItem("Load Config"))
 			{
 				App->LoadConfigRequest();
 			}
@@ -190,11 +184,47 @@ void ModuleUI::MainMenu()
 			{
 				App->window->ModifyBrightness(screenBrightness);
 			}
+			if (ImGui::MenuItem("ImGui Settings"))
+			{
+				showGUIPreferences = !showGUIPreferences;
+			}
 
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Hardware"))
 		{
+			if (frames.size() >= 100) 
+			{
+				for (size_t i = 1; i < frames.size(); i++)
+				{
+					frames[i - 1] = frames[i];
+				}
+				frames[frames.size() - 1] = float(ImGui::GetIO().Framerate);
+			}
+			else
+			{
+				frames.push_back(float(ImGui::GetIO().Framerate));
+			}
+			ImGui::Text("Frame rate = %f:", ImGui::GetIO().Framerate);
+			ImGui::PlotHistogram("Framerate", &frames[0], frames.size(), 0, NULL, 0.0f, 100.0f, ImVec2(300, 100));
+
+			if (miliseconds.size() >= 100)
+			{
+				for (size_t i = 1; i < miliseconds.size(); i++)
+				{
+					miliseconds[i - 1] = miliseconds[i];
+				}
+				miliseconds[miliseconds.size() - 1] = float(ImGui::GetIO().DeltaTime);
+			}
+			else
+			{
+				miliseconds.push_back(float(ImGui::GetIO().DeltaTime));
+			}
+			ImGui::Text("miliseconds = %f:", ImGui::GetIO().DeltaTime);
+			ImGui::PlotHistogram("miliseconds", &miliseconds[0], miliseconds.size(), 0, NULL, 0.0f, 0.5f, ImVec2(300, 100));
+			ImGui::NewLine();
+			ImGui::Text("Hardware information:");
+			ImGui::NewLine();
 			ImGui::EndMenu();
 
 		}
@@ -232,6 +262,13 @@ void ModuleUI::MainMenu()
 			}
 			ImGui::EndMenu();
 		}
+	}
+
+	if (showGUIPreferences)
+	{
+		ImGui::Begin("ImGui Settings", &showGUIPreferences);
+		ImGui::ShowStyleEditor();
+		ImGui::End();
 	}
 	ImGui::EndMainMenuBar();
 }

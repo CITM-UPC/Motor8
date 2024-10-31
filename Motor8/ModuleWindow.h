@@ -19,13 +19,17 @@ public:
 	bool CleanUp();
 
 	void SetTitle(const char* title);
+
 	void SetFullscreen(bool fullscreen);
+
 	void ModifyWidth(int x);
 	void ModifyHeight(int y);
+
 	void Vsync(bool vsync);
-	void ModifyBrightness(float brightness);
 	void SetResizable(bool resizable);
 	void SetFullDesktop(bool fullDesktop);
+	void ModifyBrightness(float brightness);
+
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 

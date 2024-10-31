@@ -11,7 +11,6 @@
 ModuleInput::ModuleInput(bool start_enabled) : Module(start_enabled)
 {
 	name = "Input";
-
 	keyboard = new KEY_STATE[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KEY_STATE) * MAX_KEYS);
 }
@@ -34,19 +33,17 @@ bool ModuleInput::Init()
 		LOG_COMMENT("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
-
 	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
-
 	return ret;
 }
 
 // Called every draw update
 bool ModuleInput::PreUpdate(float dt)
 {
-	SDL_PumpEvents();
-
-	const Uint8* keys = SDL_GetKeyboardState(NULL);
 	
+	SDL_PumpEvents();
+	const Uint8* keys = SDL_GetKeyboardState(NULL);
+	//math::Clock::Day();
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
 		if(keys[i] == 1)
@@ -96,7 +93,7 @@ bool ModuleInput::PreUpdate(float dt)
 	while(SDL_PollEvent(&e))
 	{
 		ImGui_ImplSDL2_ProcessEvent(&e);
-
+		
 		switch(e.type)
 		{
 			case SDL_MOUSEWHEEL:
@@ -116,7 +113,6 @@ bool ModuleInput::PreUpdate(float dt)
 				VertexData* NewMaterial = new VertexData();
 
 				const char* dropped_filedir = e.drop.file;
-
 				if (App->fs->GetFileExtension(dropped_filedir) == "fbx" || App->fs->GetFileExtension(dropped_filedir) == "FBX")
 				{
 					App->loaderModels->LoadMesh(dropped_filedir, nullptr);
@@ -139,12 +135,15 @@ bool ModuleInput::PreUpdate(float dt)
 				if(e.window.event == SDL_WINDOWEVENT_RESIZED)
 					App->renderer3D->OnResize(e.window.data1, e.window.data2);
 			}
+			
+			
+
 		}
 	}
 
 	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
 		return false;
-
+	
 	return true;
 }
 

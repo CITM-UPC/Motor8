@@ -13,6 +13,7 @@ class AboutMenu;
 class ModuleUI : public Module
 {
 public:
+
 	ModuleUI(bool start_enabled = true);
 
 	// Destructor
@@ -24,10 +25,11 @@ public:
 	bool PostUpdate(float dt);
 	bool CleanUp();
 
-public:
-	// MENUS
-	void MainMenu();
+	
 
+public:
+	//MENU THINGYS
+	void MainMenu();
 	bool fullscreen = false;
 	bool Vsync = false;
 	bool resizable = false;
@@ -37,15 +39,16 @@ public:
 	float screenBrightness;
 	bool testCube = false;
 	bool testMesh = false;
-
+	
 	bool enableAboutMenu;
+	bool showGUIPreferences = false;
 
 	AboutMenu* aboutMenu;
 private:
+
 	std::vector<UI*> menus;
 	std::vector<float> frames;
 	std::vector<float> miliseconds;
-
 };
 
 #endif // __ModuleWindow_H__

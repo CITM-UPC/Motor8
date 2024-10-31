@@ -3,10 +3,9 @@
 #include "ModuleSceneIntro.h"
 #include "Primitive.h"
 #include "ModuleUI.h"
-
 ModuleSceneIntro::ModuleSceneIntro(bool start_enabled) : Module(start_enabled)
 {
-	name = "Scene";
+	name = "scene";
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -18,8 +17,8 @@ bool ModuleSceneIntro::Start()
 	LOG_COMMENT("Loading Intro assets");
 	bool ret = true;
 
-	//App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	//App->camera->LookAt(vec3(0, 0, 0));
+	/*App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
+	App->camera->LookAt(vec3(0, 0, 0));*/
 
 	return ret;
 }
@@ -28,6 +27,7 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG_COMMENT("Unloading Intro scene");
+
 	for (int n = 0; n < primitives.size(); n++)
 	{
 		delete primitives[n];
@@ -43,20 +43,19 @@ bool ModuleSceneIntro::Update(float dt)
 	NormalPlane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
-
+	
 	if (App->ui->testCube)
 	{
 		Cube c(0.5, 0.5, 0.5);
 
 		//SpherePrimitive s(1, 12, 24);
-
 	}
-
 
 	for (uint n = 0; n < primitives.size(); n++)
 	{
 		primitives[n]->Update();
 	}
+
 	App->renderer3D->DrawExampleMesh(true);
 
 	return true;
@@ -69,5 +68,6 @@ bool ModuleSceneIntro::PostUpdate()
 		primitives[n]->Render();
 	}
 
+	
 	return true;
 }

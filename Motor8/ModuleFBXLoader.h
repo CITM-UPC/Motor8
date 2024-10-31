@@ -30,19 +30,21 @@ struct Texture
 };
 struct VertexData
 {
-	GLuint id_index = 0;
-	GLuint num_index = 0;
+	GLuint  id_index = 0; // index in VRAM
+	GLuint  num_index = 0;
 	GLuint* index = nullptr;
-	GLuint id_vertex = 0;
-	GLuint num_vertex = 0;
+	GLuint  id_vertex = 0; // unique vertex in VRAM
+	GLuint  num_vertex = 0;
 	float* vertex = nullptr;
+
 	GLfloat* textCords = nullptr;
 	GLuint num_uvs = 0;
 	GLuint id_uvs = 0;
+
+
 	Texture texture_data;
 
 };
-
 class ModuleFBXLoader : public Module
 {
 public:
@@ -55,7 +57,7 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	bool LoadMesh(const char* file_path, const char* texture_path);
+	bool LoadMesh(const char* file_path,const char* texture_path);
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
