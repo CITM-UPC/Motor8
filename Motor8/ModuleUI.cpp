@@ -253,9 +253,9 @@ void ModuleUI::MainMenu()
 			{
 
 			}
-			if (ImGui::MenuItem("Test mesh"))
+			if (ImGui::Checkbox("Test mesh", &testMesh))
 			{
-				App->renderer3D->DrawExampleMesh();
+				//App->renderer3D->DrawExampleMesh();
 			}
 			ImGui::EndMenu();
 

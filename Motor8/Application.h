@@ -12,14 +12,15 @@
 #include "ModuleCamera3D.h"
 #include "ModuleUI.h"
 #include "ModuleFBXLoader.h"
+#include "ModuleMaterials.h"
 #include "JsonParsing.h"
 #include "ModuleFileSystem.h"
 
 // USAR PARA STL: https://github.com/karansaxena/STL_Cheat_Sheets
 
 #define CONFIG_FILENAME	"config.json"
-#define APPLICATION_NAME "Motor8"
-#define ORGANIZATION_NAME "Motor8"
+#define APPLICATION_NAME "Motor8 Engine"
+#define ORGANIZATION_NAME "Motor8 Studios"
 
 class Application
 {
@@ -32,6 +33,7 @@ public:
 	ModuleCamera3D* camera;
 	ModuleUI* ui;
 	ModuleFBXLoader* loaderModels;
+	ModuleMaterial* materialImport;
 
 	ModuleFileSystem* fs;
 

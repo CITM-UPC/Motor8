@@ -43,7 +43,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(SolutionDir)json;$(SolutionDir)MathGeo\src;$(SolutionDir)PhysFS\include;$(SolutionDir)Assimp\include\assimp;$(SolutionDir)Assimp\include\assimp\Compiler;$(SolutionDir)Assimp\include\assimp\port\AndroidJNI;$(SolutionDir)Bugame\mmgr;$(SolutionDir)Optick\include;$(SolutionDir)DevIL\include\IL;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)SDL\libx86;$(SolutionDir)SDL_mixer\libx86;$(SolutionDir)Debug;$(SolutionDir)glew\glew-2.2.0\lib;$(SolutionDir)ImGui;$(SolutionDir)Bugame\MathGeo\lib;$(SolutionDir)PhysFS\lib;$(SolutionDir)Assimp\lib;$(SolutionDir)Optick\lib;$(SolutionDir)DevIL\lib;$(LibraryPath)</LibraryPath>
-    <TargetName>Bugame</TargetName>
+    <TargetName>Motor8</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(SolutionDir)SDL\include;$(SolutionDir)SDL_mixer\include;$(SolutionDir)Degub;$(SolutionDir)ImGui;$(SolutionDir)glew\glew-2.2.0\include\GL;$(SolutionDir)MathGeo\src\Time;$(SolutionDir)MathGeo\src\Math;$(SolutionDir)MathGeo\src\Geometry;$(SolutionDir)MathGeo\src\Algorithm;$(SolutionDir)MathGeo\;$(SolutionDir)json;$(SolutionDir)MathGeo\src;$(SolutionDir)PhysFS\include;$(SolutionDir)Assimp\include\assimp;$(SolutionDir)Assimp\include\assimp\Compiler;$(SolutionDir)Assimp\include\assimp\port\AndroidJNI;$(SolutionDir)Bugame\mmgr;$(SolutionDir)Optick\include;$(SolutionDir)DevIL\include\IL;$(IncludePath)</IncludePath>
@@ -91,6 +91,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="AssimpDefs.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="DevIL.h" />
     <ClInclude Include="glmath.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ImGui\imconfig.h" />
@@ -184,11 +185,10 @@
     <ClInclude Include="MathGeo\tests\SystemInfo.h" />
     <ClInclude Include="MathGeo\tests\TestData.h" />
     <ClInclude Include="MathGeo\tests\TestRunner.h" />
-    <ClInclude Include="mmgr\mmgr.h" />
-    <ClInclude Include="mmgr\nommgr.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleFBXLoader.h" />
     <ClInclude Include="ModuleFileSystem.h" />
+    <ClInclude Include="ModuleMaterials.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="Module.h" />
@@ -196,10 +196,7 @@
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleWindow.h" />
-    <ClInclude Include="Optick\include\optick.config.h" />
-    <ClInclude Include="Optick\include\optick.h" />
     <ClInclude Include="Primitive.h" />
-    <ClInclude Include="Profiling.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UI.h" />
@@ -300,12 +297,12 @@
     <ClCompile Include="MathGeo\tests\TriangleMeshTests.cpp" />
     <ClCompile Include="MathGeo\tests\TriangleTests.cpp" />
     <ClCompile Include="MathGeo\tests\VectorTests.cpp" />
-    <ClCompile Include="mmgr\mmgr.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleFBXLoader.cpp" />
     <ClCompile Include="ModuleFileSystem.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleMaterials.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleUI.cpp" />

@@ -26,6 +26,7 @@ Application::Application() : debug(false)
 
 	fs = new ModuleFileSystem(RESOURCES_FOLDER);
 	loaderModels = new ModuleFBXLoader();
+	materialImport = new ModuleMaterial();
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order
@@ -35,14 +36,15 @@ Application::Application() : debug(false)
 	AddModule(camera);
 	AddModule(input);
 	AddModule(audio);
-	AddModule(ui);
-	AddModule(loaderModels);
-	
+		
 	// Scenes
 	AddModule(scene_intro);
 
 	// Renderer last!
 	AddModule(renderer3D);
+	AddModule(loaderModels);
+	AddModule(materialImport);
+	AddModule(ui);
 
 	loadRequest = false;
 	saveRequest = false;

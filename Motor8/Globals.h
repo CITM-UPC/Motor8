@@ -16,7 +16,7 @@
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-#define TITLE "Edge Engine"
+#define TITLE "Motor8 Engine"
 
 
 #define LOG_COMMENT(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);
@@ -24,6 +24,9 @@ void log(const char file[], int line, const char* format, ...);
 
 
 #define CAP(n) ((n <= 0.0f) ? n=0.0f : (n >= 1.0f) ? n=1.0f : n=n)
+
+typedef unsigned __int32 uint32;
+typedef unsigned __int64 uint64;
 
 #define DEGTORAD 0.0174532925199432957f
 #define RADTODEG 57.295779513082320876f
