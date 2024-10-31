@@ -125,15 +125,15 @@ void ModuleUI::MainMenu()
 			}
 			if (ImGui::MenuItem("Documentation"))
 			{
-				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/wiki");
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/wiki");
 			}
 			if (ImGui::MenuItem("Download latest"))
 			{
-				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/releases");
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/releases");
 			}
 			if (ImGui::MenuItem("Report a bug"))
 			{
-				App->RequestBrowser("https://github.com/Taks7/EdgeEngine/issues");
+				App->RequestBrowser("https://github.com/CITM-UPC/Motor8/issues");
 			}
 			if (ImGui::MenuItem("Exit engine"))
 			{

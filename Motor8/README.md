@@ -19,17 +19,17 @@ Motor8, a powerful 3D graphics engine for game development, is meticulously craf
 
 ## Installation
 
-Installing Bugame Engine is a breeze. 
+Installing Motor8 Engine is a breeze. 
 
 - Head to the releases tab --> open the assets section --> click on the first file --> and let the download commence!
-- Compile the executable found in the download folder, and voila! the engine is ready for your use!!!
+- Compile the executable found in the download folder, the engine is ready for your use!!!
 
 ## Engine Features
 
 # UI
 ![Captura](https://user-images.githubusercontent.com/72123380/198897943-5197fc2b-91a8-4721-a32c-ff061b5348c8.PNG)
 
-- **Help:** Find information about the license, developers, tools, and libraries. Download the latest version, visit the Bugame Engine wiki, or report a bug.
+- **Help:** Find information about the license, developers, tools, and libraries. Download the latest version, visit the Motor8 Engine wiki, or report a bug.
 - **Configuration:** Save and load existing configurations for your Engine Window and Render Options preferences.
 - **Window:** Configure window options, including fullscreen, resizable, vsync, and screen dimensions.
 - **Hardware:** Display FPS and computer hardware information.
@@ -51,8 +51,11 @@ Models and textures can be easily dropped from a directory directly into the eng
 
 # Developers
 
-- Marta Llurba:
-  - Github Account: [Marta-24](https://github.com/Marta-24)
+- Daniel Berrio:
+  - Github Account: [Onnda](https://github.com/Onnda)
 
-- Kaede Sato Morales:
-  - Github Account: [KelptheWriter](https://github.com/KelptheWriter)
+- Salvador Bernades:
+  - Github Account: [SalvaBernades](https://github.com/SalvaBernades)
+
+- Justo Tiscornia:
+  - Github Account: [Jusstox](https://github.com/Jusstox)
