@@ -13,7 +13,6 @@
 #include "ModuleUI.h"
 #include "ModuleFBXLoader.h"
 #include "ModuleMaterials.h"
-#include "ModuleGameObject.h"
 #include "JsonParsing.h"
 #include "ModuleFileSystem.h"
 
@@ -35,7 +34,6 @@ public:
 	ModuleUI* ui;
 	ModuleFBXLoader* loaderModels;
 	ModuleMaterial* materialImport;
-	ModuleGameObject* gameObject;
 
 	ModuleFileSystem* fs;
 

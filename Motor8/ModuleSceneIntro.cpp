@@ -56,8 +56,6 @@ bool ModuleSceneIntro::Update(float dt)
 		primitives[n]->Update();
 	}
 
-	App->renderer3D->DrawExampleMesh(true);
-
 	return true;
 }
 
@@ -68,6 +66,28 @@ bool ModuleSceneIntro::PostUpdate()
 		primitives[n]->Render();
 	}
 
+	for (uint i = 0; i < game_objects.size(); i++)
+	{
+		if (game_objects[i]->IsActive())
+		{
+			game_objects[i]->Update();
+		}
+	}
 	
 	return true;
+}
+
+ModuleGameObject* ModuleSceneIntro::CreateEmptyGameObject(const char* name, ModuleGameObject* parent)
+{
+	std::string gameObjName = name;
+
+	if (!game_objects.empty())
+	{
+		gameObjName += std::to_string(game_objects.size());
+	}
+	ModuleGameObject* gameObject = new ModuleGameObject(game_objects.size(), gameObjName, true, false);
+
+	game_objects.push_back(gameObject);
+
+	return gameObject;
 }

@@ -2,10 +2,10 @@
 #include "Module.h"
 #include "Globals.h"
 #include <vector>
-
+#include "ModuleGameObject.h"
 
 class Primitive;
-class PhysBody3D;
+class  PhysBody3D;
 
 class ModuleSceneIntro : public Module
 {
@@ -18,7 +18,10 @@ public:
 	bool PostUpdate();
 	bool CleanUp();
 
-	//TODO 9: Create an "OnCollision" method specific for this module
+	ModuleGameObject* CreateEmptyGameObject(const char* name = nullptr, ModuleGameObject* parent = nullptr);
+public:
+	std::vector<ModuleGameObject*> game_objects;
+	ModuleGameObject* rootObject;
 
 private:
 	std::vector<Primitive*> primitives;

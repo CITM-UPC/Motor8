@@ -1,45 +1,34 @@
-/*#ifndef __ModuleComponentMesh_H__
-#define __ModuleComponentMesh_H__
+/*
+#ifndef __ModuleComponentMaterial_H__
+#define __ModuleComponentMaterial_H__
 
 #include "Module.h"
 #include "ModuleGameObject.h"
 #include <string>
 
 class ModuleGameObject;
+class ModuleMaterial;
+class ModuleFBXLoader;
 
-enum class COMPONENT_TYPES
-{
-	NONE,
-	TRANSFORM,
-	MESH,
-	MATERIAL,
-	UNKNOWN = -1
-};
+struct Texture;
 
-class ModuleComponents : public Module
+class ModuleComponentMaterial : public ModuleComponents
 {
 public:
-	ModuleComponents(ModuleGameObject* owner, COMPONENT_TYPES type, const char* name, bool is_active = true);
-	virtual ~ModuleComponents();
+	ModuleComponentMaterial(ModuleGameObject* owner);
+	~ModuleComponentMaterial();
 
-	virtual bool	Update();
-	virtual bool	CleanUp();
-
-public:
-	const char*     GetName() const;
-	void			SetName(const char* new_name);
-
-	bool			IsActive() const;
-	void			SetIsActive(const bool& is_active);
+	bool	Update();
+	bool	CleanUp();
 
 public:
-	COMPONENT_TYPES	type;
+	std::vector<ModuleFBXLoader*> textures;
 
-	ModuleGameObject* owner;
+	bool defaultTexture;
 
 private:
-	const char* name;
-	bool		is_active;
+	ModuleFBXLoader* materialUsed;
 };
 
-#endif // !__ComponentMesh_H__*/
+#endif // !__ComponentMesh_H__
+*/

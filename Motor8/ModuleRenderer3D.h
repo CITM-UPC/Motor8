@@ -6,7 +6,6 @@
 #include "ModuleFBXLoader.h"
 
 #define MAX_LIGHTS 8
-
 struct Gl_Attributes
 {
 	bool Depth_test;
@@ -18,7 +17,6 @@ struct Gl_Attributes
 	bool AmbientOclussion;
 	bool Wireframe;
 };
-
 class ModuleRenderer3D : public Module
 {
 public:
@@ -31,11 +29,12 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-	void DrawExampleMesh(bool hasTexture);
+	void DrawGameObjects(VertexData meshOfGameObject);
 
 	bool LoadConfig(JsonParsing& node) override;
 	bool SaveConfig(JsonParsing& node) const override;
 
+	
 public:
 
 	Light lights[MAX_LIGHTS];
@@ -43,4 +42,5 @@ public:
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 	Gl_Attributes atributes;
+
 };

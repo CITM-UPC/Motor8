@@ -22,12 +22,6 @@
     <Filter Include="Sources\ImGui">
       <UniqueIdentifier>{0974bc9e-8927-402e-a771-a6c14de6ea1d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Menus">
-      <UniqueIdentifier>{384c39b0-daef-4f00-8a98-2854a3f844c2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Menus\UI">
-      <UniqueIdentifier>{911eae66-75de-48c6-a2f8-32d701725584}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\Tools\Json">
       <UniqueIdentifier>{6ad6fc67-a1d8-46ac-8069-4f4f1d1cb040}</UniqueIdentifier>
     </Filter>
@@ -60,6 +54,12 @@
     </Filter>
     <Filter Include="Sources\Modules\GameObjects\Components">
       <UniqueIdentifier>{7387ffab-c541-4cf0-a126-9f1320465879}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\UI">
+      <UniqueIdentifier>{711fdb3d-d039-496c-89ce-b1d29ec25d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\UI\Menus">
+      <UniqueIdentifier>{384c39b0-daef-4f00-8a98-2854a3f844c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -124,7 +124,7 @@
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ModuleUI.h">
-      <Filter>Sources\Menus</Filter>
+      <Filter>Sources\UI\Menus</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_impl_sdl.h">
       <Filter>Sources\ImGui</Filter>
@@ -132,11 +132,8 @@
     <ClInclude Include="ImGui\imgui_impl_opengl2.h">
       <Filter>Sources\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>Sources\Menus\UI</Filter>
-    </ClInclude>
     <ClInclude Include="AboutMenu.h">
-      <Filter>Sources\Menus</Filter>
+      <Filter>Sources\UI\Menus</Filter>
     </ClInclude>
     <ClInclude Include="JsonParsing.h">
       <Filter>Sources\Tools\Json</Filter>
@@ -417,6 +414,15 @@
     <ClInclude Include="ModuleComponentTransform.h">
       <Filter>Sources\Modules\GameObjects\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Hierarchy.h">
+      <Filter>Sources\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Sources\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>Sources\UI\Menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -477,7 +483,7 @@
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ModuleUI.cpp">
-      <Filter>Sources\Menus</Filter>
+      <Filter>Sources\UI\Menus</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_sdl.cpp">
       <Filter>Sources\ImGui</Filter>
@@ -485,11 +491,8 @@
     <ClCompile Include="ImGui\imgui_impl_opengl2.cpp">
       <Filter>Sources\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>Sources\Menus\UI</Filter>
-    </ClCompile>
     <ClCompile Include="AboutMenu.cpp">
-      <Filter>Sources\Menus</Filter>
+      <Filter>Sources\UI\Menus</Filter>
     </ClCompile>
     <ClCompile Include="JsonParsing.cpp">
       <Filter>Sources\Tools\Json</Filter>
@@ -754,6 +757,18 @@
     </ClCompile>
     <ClCompile Include="ModuleComponentTransform.cpp">
       <Filter>Sources\Modules\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleComponentMesh.cpp">
+      <Filter>Sources\Modules\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Hierarchy.cpp">
+      <Filter>Sources\UI\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Sources\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>Sources\UI\Menus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,45 +1,37 @@
-/*#ifndef __ModuleComponentMesh_H__
-#define __ModuleComponentMesh_H__
+#ifndef _ModuleComponentMesh_H_
+#define _ModuleComponentMesh_H_
 
 #include "Module.h"
 #include "ModuleGameObject.h"
+#include "ModuleFBXLoader.h"
 #include <string>
 
 class ModuleGameObject;
+class ModuleFBXLoader;
 
-enum class COMPONENT_TYPES
-{
-	NONE,
-	TRANSFORM,
-	MESH,
-	MATERIAL,
-	UNKNOWN = -1
-};
-
-class ModuleComponents : public Module
+class ModuleComponentsMesh : public ModuleComponents
 {
 public:
-	ModuleComponents(ModuleGameObject* owner, COMPONENT_TYPES type, const char* name, bool is_active = true);
-	virtual ~ModuleComponents();
+	ModuleComponentsMesh(ModuleGameObject* owner);
+	~ModuleComponentsMesh();
 
 	virtual bool	Update();
 	virtual bool	CleanUp();
 
 public:
-	const char*     GetName() const;
-	void			SetName(const char* new_name);
+	ModuleFBXLoader* GetMesh() const;
+	void SetMesh(VertexData mesh);
 
-	bool			IsActive() const;
-	void			SetIsActive(const bool& is_active);
-
-public:
-	COMPONENT_TYPES	type;
-
-	ModuleGameObject* owner;
+	VertexData GetMesh();
+	/*
+	std::string GetMeshPath() const;
+	void SetMeshPath(const char* path);
+	void GetMeshData(uint& num_vertices, uint& num_normals, uint& num_tex_coords, uint& num_indices);
+	*/
 
 private:
-	const char* name;
-	bool		is_active;
+	//mesh needed here 
+	VertexData mesh;
 };
 
-#endif // !__ComponentMesh_H__*/
+#endif 
