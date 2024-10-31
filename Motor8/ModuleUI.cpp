@@ -13,12 +13,18 @@
 #include "AboutMenu.h"
 #include "Hierarchy.h"
 #include "Inspector.h"
+#include "ModuleConsole.h"
 
 #pragma comment (lib, "glew/glew-2.2.0/lib/glew32.lib")
 
 ModuleUI::ModuleUI(bool start_enabled) : Module(start_enabled)
 {
 	name = "UI";
+
+	menus.push_back(aboutMenu = new AboutMenu());
+	menus.push_back(hierarchy = new Hierarchy());
+	menus.push_back(inspector = new InspectorMenu());
+	menus.push_back(consoleMenu = new ModuleConsole());
 }
 
 // Destructor
@@ -42,10 +48,6 @@ bool ModuleUI::Init()
 
 	ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer3D->context);
 	ImGui_ImplOpenGL2_Init();
-
-	//Way to add menus to the menu list
-	menus.push_back(aboutMenu = new AboutMenu());
-	menus.push_back(hierarchy = new Hierarchy());
 
 	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;
@@ -284,11 +286,13 @@ void ModuleUI::MainMenu()
 			if (ImGui::MenuItem("CreateEmpty"))
 			{
 				App->scene_intro->CreateEmptyGameObject("empty", nullptr);
+				LOG_COMMENT("[SCENE] Created an Empty Game Object")
 			}
 
 			if (ImGui::MenuItem("Create GameObjectWithMesh"))
 			{
 				App->loaderModels->LoadMeshToGameObject(App->scene_intro->CreateEmptyGameObject("house", nullptr), "Assets/BakerHouse.fbx", "Assets/Resources/Baker_House.png");
+				LOG_COMMENT("[SCENE] Created a Game Object with Mesh and Textures")
 			}
 
 			ImGui::EndMenu();
@@ -302,5 +306,14 @@ void ModuleUI::MainMenu()
 		ImGui::ShowStyleEditor();
 		ImGui::End();
 	}
+
 	ImGui::EndMainMenuBar();
+}
+
+void ModuleUI::ConsoleLogs(const char* log)
+{
+	if (consoleMenu != nullptr)
+	{
+		consoleMenu->AddLog(log);
+	}
 }

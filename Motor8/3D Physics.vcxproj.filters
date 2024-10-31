@@ -61,6 +61,9 @@
     <Filter Include="Sources\UI\Menus">
       <UniqueIdentifier>{384c39b0-daef-4f00-8a98-2854a3f844c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\UI\Console">
+      <UniqueIdentifier>{5fbc82e0-00b1-4478-a7e8-ee57bb5faf9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -423,6 +426,9 @@
     <ClInclude Include="Inspector.h">
       <Filter>Sources\UI\Menus</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleConsole.h">
+      <Filter>Sources\UI\Console</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleAudio.cpp">
@@ -769,6 +775,9 @@
     </ClCompile>
     <ClCompile Include="Inspector.cpp">
       <Filter>Sources\UI\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleConsole.cpp">
+      <Filter>Sources\UI\Console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

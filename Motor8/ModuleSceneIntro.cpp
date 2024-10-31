@@ -56,6 +56,11 @@ bool ModuleSceneIntro::Update(float dt)
 		primitives[n]->Update();
 	}
 
+	for (uint j = 0; j < game_objects.size(); j++)
+	{
+		game_objects.at(j)->Render();
+	}
+
 	return true;
 }
 

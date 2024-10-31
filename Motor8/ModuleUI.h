@@ -10,6 +10,8 @@ class Application;
 class UI;
 class AboutMenu;
 class Hierarchy;
+class InspectorMenu; 
+class ModuleConsole;
 
 class ModuleUI : public Module
 {
@@ -31,6 +33,7 @@ public:
 public:
 	//MENU THINGYS
 	void MainMenu();
+	void ConsoleLogs(const char* log);
 	bool fullscreen = false;
 	bool Vsync = false;
 	bool resizable = false;
@@ -46,6 +49,9 @@ public:
 
 	AboutMenu* aboutMenu;
 	Hierarchy* hierarchy;
+	InspectorMenu* inspector;
+
+	ModuleConsole* consoleMenu;
 
 	std::string GPUSeller;
 	std::string GPUSpecs;

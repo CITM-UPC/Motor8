@@ -2,6 +2,7 @@
 #include "Module.h"
 #include <list>
 #include <string>
+#include <vector>
 #include "Globals.h"
 #include "Timer.h"
 #include "ModuleWindow.h"
@@ -69,6 +70,7 @@ public:
 	float GetRAM();
 
 	void GetSDLVersion(int& major, int& minor, int& patch);
+	void AddConsoleLogs(const char* log);
 
 
 private:

@@ -1,5 +1,7 @@
+#include <functional>
+#include <algorithm>
+#include <memory>
 #include "Application.h"
-
 #include "Globals.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
@@ -23,6 +25,7 @@ Application::Application() : debug(false)
 	renderer3D = new ModuleRenderer3D();
 	camera = new ModuleCamera3D();
 	ui = new ModuleUI();
+	audio = new ModuleAudio();
 
 	fs = new ModuleFileSystem(RESOURCES_FOLDER);
 	loaderModels = new ModuleFBXLoader();
@@ -35,6 +38,7 @@ Application::Application() : debug(false)
 	AddModule(window);
 	AddModule(camera);
 	AddModule(input);
+	AddModule(audio);
 	
 	
 	// Scenes
@@ -249,6 +253,24 @@ void Application::GetSDLVersion(int& major, int& minor, int& patch)
 	major = v.major;
 	minor = v.minor;
 	patch = v.patch;
+}
+
+void Application::AddConsoleLogs(const char* log)
+{
+	if (ui != nullptr)
+	{
+		std::string full_log = log;
+
+		uint log_start = full_log.find_last_of("\\") + 1;
+		uint log_end = full_log.size();
+
+		std::string short_log = full_log.substr(log_start, log_end);
+
+		ui->ConsoleLogs(short_log.c_str());
+
+		short_log.clear();
+		full_log.clear();
+	}
 }
 
 Application* App = nullptr;
