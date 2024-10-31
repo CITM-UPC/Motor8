@@ -16,7 +16,7 @@
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP false
 #define VSYNC true
-#define TITLE "Edge Engine"
+#define TITLE "Motor8"
 
 
 #define LOG_COMMENT(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);

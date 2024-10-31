@@ -19,7 +19,7 @@ void AboutMenu::Draw()
 		ImGui::SetWindowSize({ 600,700 });
 		ImGui::Text("Motor8");
 		ImGui::Text("The engine with no bugs :D");
-		ImGui::Text("By Marta Llurba & Kaede Sato Morales");
+		ImGui::Text("Daniel Berrio, Salva Bernades, Justo Tiscornia");
 		ImGui::NewLine();
 		ImGui::Text("3rd parties libraries used:");
 
