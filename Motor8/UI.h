@@ -19,8 +19,9 @@ public:
 
 	bool active = false;
 private:
-
+	
 };
 
 
 #endif // _UI_H_
+

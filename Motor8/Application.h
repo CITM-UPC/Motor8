@@ -20,7 +20,7 @@
 
 #define CONFIG_FILENAME	"config.json"
 #define APPLICATION_NAME "Motor8"
-#define ORGANIZATION_NAME "Motor8"
+#define ORGANIZATION_NAME "UOC - CITM"
 
 class Application
 {

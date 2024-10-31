@@ -10,9 +10,11 @@ public:
 	virtual ~Hierarchy();
 
 	void Draw() override;
-
 	void GameObjectList();
-
 	void PopUpOptions();
+	void ProcessGameObject(ModuleGameObject* gameObject);
+
+public:
+	bool showPopUp;
 };
 #endif // !_ABOUT_MENU_H
