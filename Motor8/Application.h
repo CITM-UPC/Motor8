@@ -65,6 +65,12 @@ public:
 	inline void SaveConfigRequest() { saveRequest = true; }
 	inline void LoadConfigRequest() { loadRequest = true; }
 
+	void GetCPU(int& count, int& size);
+	float GetRAM();
+
+	void GetSDLVersion(int& major, int& minor, int& patch);
+
+
 private:
 
 	void AddModule(Module* mod);

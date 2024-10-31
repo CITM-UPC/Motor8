@@ -46,11 +46,15 @@ bool ModuleUI::Init()
 	//Way to add menus to the menu list
 	menus.push_back(aboutMenu = new AboutMenu());
 	menus.push_back(hierarchy = new Hierarchy());
-	menus.push_back(inspector = new InspectorMenu());
 
 	screenBrightness = 1.0f;
 	screenHeight = App->window->screen_surface->h;
 	screenWidth = App->window->screen_surface->w;
+
+	GPUSeller = (const char*)glGetString(GL_VENDOR);
+	GPUSpecs = (const char*)glGetString(GL_RENDERER);
+	GPUDrivers = (const char*)glGetString(GL_VERSION);
+
 	return true;
 }
 
@@ -114,9 +118,9 @@ void ModuleUI::MainMenu()
 	//MENUS 
 	ImGui::BeginMainMenuBar();
 	{
-		/*if (ImGui::BeginMenu("Help"))
+		if (ImGui::BeginMenu("Help"))
 		{
-			ImGui::SetNextWindowBgAlpha(1.0f);
+			/*ImGui::SetNextWindowBgAlpha(1.0f);
 			if(ImGui::MenuItem("About..."))
 			{
 				aboutMenu->switchActive();
@@ -229,6 +233,15 @@ void ModuleUI::MainMenu()
 			ImGui::NewLine();
 			ImGui::Text("Hardware information:");
 			ImGui::NewLine();
+			int count, size;
+			App->GetCPU(count, size);
+			ImGui::Text("CPUs: %d (%dKb)", count, size);
+			ImGui::Separator();
+			ImGui::Text("GPU Seller: %s\nGPU Specifications: %s\nGPU Drivers: %s", GPUSeller.c_str(), GPUSpecs.c_str(), GPUDrivers.c_str());
+			ImGui::Separator();
+			int major, minor, patch;
+			App->GetSDLVersion(major, minor, patch);
+			ImGui::Text("SDL Version: %d.%d.%d", major, minor, patch);
 			ImGui::EndMenu();
 
 		}

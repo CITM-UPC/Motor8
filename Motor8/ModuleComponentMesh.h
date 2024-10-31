@@ -24,7 +24,6 @@ public:
 
 	VertexData GetMesh();
 
-	//mesh needed here 
 	VertexData mesh;
 	const char* meshPath;
 	const char* texturePath;

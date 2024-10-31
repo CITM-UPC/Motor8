@@ -1,53 +1,70 @@
-#include "Globals.h"
+#include "Application.h"
 #include "Module.h"
-#include "ModuleComponent.h"
+#include "ModuleComponentTransform.h"
 #include "ModuleGameObject.h"
 
-/*
-ModuleComponents::ModuleComponents(ModuleGameObject* owner, COMPONENT_TYPES type, const char* name, bool is_active) :
-type(type),
-owner(owner),
-name(name),
-is_active(is_active)
+ModuleComponentsTransform::ModuleComponentsTransform(ModuleGameObject* owner) : ModuleComponents(owner, COMPONENT_TYPES::TRANSFORM, "Transform")
 {
 
 }
 
-ModuleComponents::~ModuleComponents()
+ModuleComponentsTransform::~ModuleComponentsTransform()
 {
 
 }
 
-bool ModuleComponents::Update()
+bool ModuleComponentsTransform::Update()
 {
 	bool ret = true;
 
 	return ret;
 }
 
-bool ModuleComponents::CleanUp()
+bool ModuleComponentsTransform::CleanUp()
 {
 	bool ret = true;
 
 	return ret;
 }
 
-const char* ModuleComponents::GetName() const
+void ModuleComponentsTransform::Transform()
 {
-	return name;
+
 }
 
-void ModuleComponents::SetName(const char* new_name)
+float3 ModuleComponentsTransform::GetPosition() const
 {
-	name = new_name;
+	return position;
 }
 
-bool ModuleComponents::IsActive() const
+float3 ModuleComponentsTransform::GetRotation() const
 {
-	return is_active;
+	return euler_rotation;
 }
 
-void ModuleComponents::SetIsActive(const bool& set_to)
+float3 ModuleComponentsTransform::GetScale() const
 {
-	is_active = set_to;
-}*/
+	return scale;
+}
+
+void ModuleComponentsTransform::SetPosition(const float3& position)
+{
+	this->position = position;
+
+}
+
+void ModuleComponentsTransform::SetRotation(const float3& rotation)
+{
+	euler_rotation = rotation;
+
+	this->rotation.RotateX(euler_rotation.x);
+	this->rotation.RotateY(euler_rotation.y);
+	this->rotation.RotateZ(euler_rotation.z);
+
+}
+
+void ModuleComponentsTransform::SetScale(const float3& scale)
+{
+	this->scale = scale;
+
+}

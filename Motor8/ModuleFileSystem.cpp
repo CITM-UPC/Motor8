@@ -22,7 +22,6 @@
 ModuleFileSystem::ModuleFileSystem(const char* assetsPath) : name("ModuleFileSystem")
 {
 	name = "File System";
-
 	char* basePath = SDL_GetBasePath();
 	PHYSFS_init(basePath);
 	SDL_free(basePath);
